@@ -1,13 +1,29 @@
-<ion-modal-view>
+<ion-view view-title="LOGIN">
+ 
   <ion-header-bar>
-    <h1 class="title">Login</h1>
+    <h1 class="title ">Login</h1>
     <div class="buttons">
       <button class="button button-clear" ng-click="closeLogin()">Close</button>
     </div>
   </ion-header-bar>
-  <ion-content>
+  
+  <!--<ion-nav-bar class="bar-energized">
+             
+        <ion-nav-buttons side="left">
+          <button class="button icon ion-navicon" ></button>
+          </ion-nav-buttons>
+          
+          <ion-nav-buttons side="right">          
+         <button class="button button-clear" ng-click="closeLogin()">Close</button>
+          </ion-nav-buttons>
+    
+ </ion-nav-bar>
+    -->
+ 
+  <ion-content ><!--class="loginbg"-->
+   <div >
     <form ng-submit="doLogin()">
-      <div class="list">
+      <div class="list" style="margin-top:20%;">
         <label class="item item-input">
           <span class="input-label">Username</span>
           <input type="text" ng-model="loginData.username">
@@ -21,5 +37,6 @@
         </label>
       </div>
     </form>
+    </div>
   </ion-content>
-</ion-modal-view>
+</ion-view>
