@@ -20,23 +20,35 @@
  </ion-nav-bar>
     -->
  
-  <ion-content ><!--class="loginbg"-->
+  <ion-content class="loginbg logobg" ><!--class="loginbg"-->
    <div >
     <form ng-submit="doLogin()">
-      <div class="list" style="margin-top:20%;">
-        <label class="item item-input">
-          <span class="input-label">Username</span>
+      <div class="list" style="top:24vh; padding:6%;">
+        <label class="item1 item1-input">
+          <span class="input-label">Phone</span>
           <input type="text" ng-model="loginData.username">
         </label>
-        <label class="item item-input">
+        <label class="item1 item1-input" style="top:1vh;">
           <span class="input-label">Password</span>
           <input type="password" ng-model="loginData.password">
         </label>
-        <label class="item">
-          <button class="button button-block button-positive" type="submit">Log in</button>
+        <label class="" >
+          <button class="button button-block button-positive" type="submit" style="top:2vh;">Sign in</button>
         </label>
       </div>
     </form>
+  <!-- <div class="row">
+  <div class="col">
+  <button class="button button-clear button-positive">
+ Skip
+</button>
+ </div>
+  <div class="col">
+  <button class="button button-clear button-positive">
+ Sign up
+</button>
+</div>
+</div>-->
     </div>
   </ion-content>
 </ion-view>
