@@ -6,61 +6,106 @@ color: #FF6F11 !important;
 .loginbg
 {
     
-     background: url(../img/bg.png) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+ background: url(../img/bg.png) no-repeat center center fixed; 
+ -webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
   background-size: cover;
+    
+}
+.signupbg
+{
+background-color: white;
 }
 
-
+/*signup page*/
 .item1 {
   border-color: #ddd;
-  color: white;
-  background-color: transparent;
+  background-color: #fff;
+  color: #444;
   position: relative;
   z-index: 2;
   display: block;
   margin: -1px;
   padding: 16px;
-  border-width: 1px;
-  border-style: solid;
   font-size: 16px; }
 
-.item1-input {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -moz-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
-  background-color: transparent;
-  padding: 6px 0 5px 16px; }
-
-textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
-  display: block;
-  padding-top: 2px;
-  padding-left: 0;
-  height: 34px;
-  color: #111;
-  vertical-align: middle;
-  font-size: 14px;
-  line-height: 16px;
-     BACKGROUND-COLOR: TRANSPARENT;
-    WIDTH: 105%;
+.border
+{
+border-bottom: #0079c1 3px solid;
 }
 
-.input-label {
-  display: table;
-  padding: 7px 10px 7px 0px;
-  max-width: 200px;
-  width: 35%;
-  color: #FFF9F9;
-  font-size: 16px; }
+.border2{
+    border-bottom: #0079c1 2px solid;
+}
+.signup
+{
+text-align: center;
+}
+
+.signupbox
+{
+padding: 5%;
+}
+
+.gobutton
+{
+       width: 31%;
+    top: 10vh;
+    border-radius: 71px;
+    padding: 11px;
+    border: #EAEAF1 3px double !important;
+  font-weight: 900;
+    border-color: #F58220;
+    background-color: #F9790B;
+    color: black; 
+}
+
+/*otp page*/
+
+.otpbg
+{
+background-color: #F58220;
+}
+
+.gobutton2
+{
+    width: 31%;
+    top: 5vh;
+    font-size: large;
+    border-radius: 71px;
+    padding: 11px;
+    border: #F58220 3px double !important;
+    font-weight: 400;
+     color: black;
+}
+.resendbutton
+{
+    border-color: white;
+    background: transparent;
+    color: white;
+}
+.thankyou
+{
+    text-align: center;
+    margin-top: 28vh;
+    font-weight: 200;
+    color: white;
+    font-size: large;
+}
+.thankyou2
+{
+       text-align: center;
+    margin-top: 19vh;
+    font-weight: 100;
+    color: #060606;
+}
+
+.thankyou3
+{
+  text-align: center;
+   
+    font-weight: 100;
+    color: #060606;
+}
+

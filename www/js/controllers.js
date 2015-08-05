@@ -47,6 +47,12 @@ angular.module('starter.controllers', [])
 })
 
 .controller('loginCtrl', function($scope, $stateParams) {
+    
+})
+.controller('otpCtrl', function($scope, $stateParams) {
+    
+})
+.controller('signupCtrl', function($scope, $stateParams, $location) {
 });
 
   
