@@ -46,13 +46,20 @@ angular.module('starter.controllers', [])
 .controller('accountCtrl', function($scope, $stateParams) {
 })
 
-.controller('loginCtrl', function($scope, $stateParams) {
-    
+.controller('loginCtrl', function($scope,$stateParams,$location) {
+  $scope.login = function() 
+{
+           $location.path("#/app/home");
+};
 })
 .controller('otpCtrl', function($scope, $stateParams) {
     
 })
 .controller('signupCtrl', function($scope, $stateParams, $location) {
+     $scope.signup = function() 
+{
+           $location.path("#/app/otp");
+};
 });
 
   
