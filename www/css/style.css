@@ -6,7 +6,7 @@ color: #FF6F11 !important;
 .loginbg
 {
     
- background: url(../img/bg.png) no-repeat center center fixed; 
+ background: url(../img/bg2.png) no-repeat center center fixed; 
  -webkit-background-size: cover;
  -moz-background-size: cover;
  -o-background-size: cover;
@@ -21,7 +21,7 @@ background-color: white;
 /*signup page*/
 .item1 {
   border-color: #ddd;
-  background-color: #fff;
+ /* background-color: #fff;*/
   color: #444;
   position: relative;
   z-index: 2;
@@ -35,12 +35,11 @@ background-color: white;
 border-bottom: #0079c1 3px solid;
 }
 
-.border2{
-    border-bottom: #0079c1 2px solid;
-}
+
 .signup
 {
 text-align: center;
+font-size: larger !importantn;  
 }
 
 .signupbox
@@ -55,7 +54,7 @@ padding: 5%;
     border-radius: 71px;
     padding: 11px;
     border: #EAEAF1 3px double !important;
-  font-weight: 900;
+  /*font-weight: 900;*/
     border-color: #F58220;
     background-color: #F9790B;
     color: black; 
@@ -87,7 +86,7 @@ background-color: #F58220;
 }
 .thankyou
 {
-    text-align: center;
+   
     margin-top: 28vh;
     font-weight: 200;
     color: white;
@@ -95,17 +94,24 @@ background-color: #F58220;
 }
 .thankyou2
 {
-       text-align: center;
-    margin-top: 19vh;
+       
     font-weight: 100;
     color: #060606;
 }
 
 .thankyou3
 {
-  text-align: center;
+  
    
     font-weight: 100;
     color: #060606;
 }
 
+.entercode {
+  border-color: red !important;
+  color: red !important;
+  position: relative;
+  z-index: 2;
+  display: block;
+  
+}
