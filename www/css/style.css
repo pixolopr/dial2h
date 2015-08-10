@@ -50,7 +50,7 @@ padding: 5%;
 .gobutton
 {
        width: 31%;
-    top: 10vh;
+    top: 4vh;
     border-radius: 71px;
     padding: 11px;
     border: #EAEAF1 3px double !important;
@@ -87,7 +87,7 @@ background-color: #F58220;
 .thankyou
 {
    
-    margin-top: 28vh;
+    margin-top: 4vh;
     font-weight: 200;
     color: white;
     font-size: large;
