@@ -68,6 +68,24 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         controller: 'PlaylistCtrl'
       }
     }
+  })
+  .state('app.signup', {
+    url: '/signup',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/signup.html',
+        controller: 'signupCtrl'
+      }
+    }
+  })
+  .state('app.otp', {
+    url: '/otp',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/otp.html',
+        controller: 'otpCtrl'
+      }
+    }
   }) 
   .state('app.login', {
     url: '/login',

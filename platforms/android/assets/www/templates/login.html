@@ -1,13 +1,13 @@
 <ion-view view-title="LOGIN">
- 
-  <ion-header-bar>
-    <h1 class="title ">Login</h1>
-    <div class="buttons">
-      <button class="button button-clear" ng-click="closeLogin()">Close</button>
-    </div>
-  </ion-header-bar>
-  
-  <!--<ion-nav-bar class="bar-energized">
+
+    <ion-header-bar>
+        <h1 class="title ">Login</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeLogin()">Close</button>
+        </div>
+    </ion-header-bar>
+
+    <!--<ion-nav-bar class="bar-energized">
              
         <ion-nav-buttons side="left">
           <button class="button icon ion-navicon" ></button>
@@ -19,24 +19,37 @@
     
  </ion-nav-bar>
     -->
- 
-  <ion-content ><!--class="loginbg"-->
-   <div >
-    <form ng-submit="doLogin()">
-      <div class="list" style="margin-top:20%;">
-        <label class="item item-input">
-          <span class="input-label">Username</span>
-          <input type="text" ng-model="loginData.username">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Password</span>
-          <input type="password" ng-model="loginData.password">
-        </label>
-        <label class="item">
-          <button class="button button-block button-positive" type="submit">Log in</button>
-        </label>
-      </div>
-    </form>
-    </div>
-  </ion-content>
+
+    <ion-content class="loginbg ">
+        <!--class="loginbg"-->
+        <div style="text-align:center;"> <img src="img/logo.png" alt="">
+        </div>
+        <div>
+            <form ng-submit="doLogin()">
+
+
+                <div class="list" style="top:19vh;    width: 95%; padding-left: 6%;">
+                    <label class="item item-input" style="margin-bottom:10px; border-radius: 8px;">
+                        <input type="number" ng-model="loginData.username" placeholder="Phone">
+                    </label>
+                    <label class="item item-input" style="border-radius: 8px;">
+                        <input type="password" ng-model="loginData.password" placeholder="Password">
+                    </label>
+                </div>
+
+                <div style="padding-left: 10%;">
+                    <button ng-click="login()" class="button button-outline button-positive" style="width: 90%;top: 20vh;padding: 9px;font-weight: 900;border-radius: 9px;">
+                        Sign in
+                    </button>
+                </div>
+                <div style="padding-left: 10%;">
+                    <button class="button button-outline button-energized" style="width: 90%;top: 23vh;padding: 9px;font-weight: 900;border-radius: 9px;" ng-click="opensignuppage()">
+                        Sign up
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </ion-content>
 </ion-view>

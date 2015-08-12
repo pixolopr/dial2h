@@ -53,7 +53,9 @@ C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\templates \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\css\style.css \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\bg.jpg \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\bg.png \
+C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\bg2.png \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\ionic.png \
+C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\logo.png \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\js\app.js \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\js\controllers.js \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\lib\angular \
@@ -177,6 +179,8 @@ C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\plugins\org.apache.cor
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\templates\account.html \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\templates\login.html \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\templates\menu.html \
+C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\templates\otp.html \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\templates\search.html \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\templates\share.html \
+C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\templates\signup.html \
 C:\xampp\htdocs\dial2hireapp\platforms\android\ant-build\AndroidManifest.xml \

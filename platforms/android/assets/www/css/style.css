@@ -6,9 +6,112 @@ color: #FF6F11 !important;
 .loginbg
 {
     
-     background: url(../img/bg.png) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+ background: url(../img/bg2.png) no-repeat center center fixed; 
+ -webkit-background-size: cover;
+ -moz-background-size: cover;
+ -o-background-size: cover;
   background-size: cover;
+    
+}
+.signupbg
+{
+background-color: white;
+}
+
+/*signup page*/
+.item1 {
+  border-color: #ddd;
+ /* background-color: #fff;*/
+  color: #444;
+  position: relative;
+  z-index: 2;
+  display: block;
+  margin: -1px;
+  padding: 16px;
+  font-size: 16px; }
+
+.border
+{
+border-bottom: #0079c1 3px solid;
+}
+
+
+.signup
+{
+text-align: center;
+font-size: larger !importantn;  
+}
+
+.signupbox
+{
+padding: 5%;
+}
+
+.gobutton
+{
+       width: 31%;
+    top: 4vh;
+    border-radius: 71px;
+    padding: 11px;
+    border: #EAEAF1 3px double !important;
+  /*font-weight: 900;*/
+    border-color: #F58220;
+    background-color: #F9790B;
+    color: black; 
+}
+
+/*otp page*/
+
+.otpbg
+{
+background-color: #F58220;
+}
+
+.gobutton2
+{
+    width: 31%;
+    top: 5vh;
+    font-size: large;
+    border-radius: 71px;
+    padding: 11px;
+    border: #F58220 3px double !important;
+    font-weight: 400;
+     color: black;
+}
+.resendbutton
+{
+    border-color: white;
+    background: transparent;
+    color: white;
+}
+.thankyou
+{
+   
+    margin-top: 4vh;
+    font-weight: 200;
+    color: white;
+    font-size: large;
+}
+.thankyou2
+{
+       
+    font-weight: 100;
+    color: #060606;
+}
+
+.thankyou3
+{
+  
+   
+    font-weight: 100;
+    color: #060606;
+}
+
+.entercode {
+  border-color: red !important;
+  color: red !important;
+  position: relative;
+  z-index: 2;
+  display: block;
+  
 }
