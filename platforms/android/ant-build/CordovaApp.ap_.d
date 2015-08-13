@@ -58,6 +58,7 @@ C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\ionic.png \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\logo.png \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\js\app.js \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\js\controllers.js \
+C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\js\services.js \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\lib\angular \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\lib\angular-animate \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\lib\angular-sanitize \
@@ -183,4 +184,5 @@ C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\templates\otp.html \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\templates\search.html \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\templates\share.html \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\templates\signup.html \
+C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\templates\vehiclelist.html \
 C:\xampp\htdocs\dial2hireapp\platforms\android\ant-build\AndroidManifest.xml \

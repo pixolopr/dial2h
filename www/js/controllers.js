@@ -59,8 +59,49 @@ angular.module('starter.controllers', [])
             $location.path("/app/home");
         };
     })
-    .controller('signupCtrl', function ($scope, $stateParams, $location) {
-        $scope.signup = function () {
-            $location.path("/app/otp");
+    .controller('signupCtrl', function ($scope, $stateParams, $location, MyServices) {
+
+        $scope.signupdata = {};
+
+        var signupsuccess = function (data, status) {
+            if (data == "false") {
+                alert("Number already registered");
+            } else {
+                $location.path("/app/otp");
+                console.log(data);
+            };
         };
+
+        $scope.signup = function () {
+            MyServices.signupuser($scope.signupdata).success(signupsuccess);
+        };
+    })
+    .controller('searchCtrl', function ($scope, $stateParams, $location) {
+        $scope.getvehicles = function (type) {
+            $location.path("/app/vehiclelist/" + type);
+        };
+    })
+    .controller('vehiclelistCtrl', function ($scope, $stateParams, $location, MyServices, $ionicLoading, $ionicSideMenuDelegate) {
+
+        //PAGE SETUP
+        //CAN DRAP CONTENT FOR MENU - TRUE
+        $ionicSideMenuDelegate.canDragContent(true);
+        console.log($ionicSideMenuDelegate.canDragContent(true));
+
+        var type = $stateParams.type;
+
+        $ionicLoading.show({
+            template: 'Fetching Vehicles...'
+        });
+
+        var getvehiclesbytypesuccess = function (data, status) {
+            console.log(data);
+            $scope.vehicledata = data;
+            $ionicLoading.hide();
+        };
+        var location = {
+            latitude: "19.50",
+            longitude: "23.50"
+        };
+        MyServices.getvehiclesbytype(type, location).success(getvehiclesbytypesuccess);
     });

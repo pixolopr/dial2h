@@ -1,13 +1,13 @@
 <ion-view view-title="Sign Up">
- 
-  <ion-header-bar>
-    <h1 class="title ">Sign Up</h1>
-    <div class="buttons">
-      <button class="button button-clear" ng-click="closeLogin()">Close</button>
-    </div>
-  </ion-header-bar>
-  
-  <!--<ion-nav-bar class="bar-energized">
+
+    <ion-header-bar>
+        <h1 class="title ">Sign Up</h1>
+        <div class="buttons">
+            <button class="button button-clear" ng-click="closeLogin()">Close</button>
+        </div>
+    </ion-header-bar>
+
+    <!--<ion-nav-bar class="bar-energized">
              
         <ion-nav-buttons side="left">
           <button class="button icon ion-navicon" ></button>
@@ -19,30 +19,26 @@
     
  </ion-nav-bar>
     -->
- 
-  <ion-content class="signupbg " ><!--class="loginbg"-->
-   <div style="text-align:center;"> <img src="img/logo.png" alt=""></div>
- <div class="list signupbox">
-  <label class="item1 item-input border" >
-    <input type="text" placeholder="Whats your Name?" class="signup">
-  </label>
-   <label class="item1 item-input border">
-    <input type="number" placeholder="Mobile number" class="signup">
-  </label>
-   <label class="item1 item-input border" >
-    <input type="password" placeholder="Password" class="signup">
-  </label>
-   <label class="item1 item-input border">
-    <input type="text" placeholder="City" class="signup">
-  </label>
-  
-</div>
- <div style="padding-left: 43%;"> 
 
- <button  ng-click="signup()" class="button  gobutton" style="box-shadow: black 2px 2px 3px; font-size: x-large; padding: 6px;" >
- Go
-</button>
-      </div>
- 
-  </ion-content>
+    <ion-content class="signupbg ">
+        <!--class="loginbg"-->
+        <div style="text-align:center;"> <img src="img/logo.png" alt="">
+        </div>
+        <div class="list signupbox">
+            <label class="item1 item-input border">
+                <input type="text" placeholder="Whats your Name?" ng-model="signupdata.fullname" class="signup">
+            </label>
+            <label class="item1 item-input border">
+                <input type="number" placeholder="Mobile number" ng-model="signupdata.mobileno" class="signup">
+            </label>
+
+        </div>
+        <div style="padding-left: 43%;">
+
+            <button ng-click="signup()" class="button  gobutton" style="box-shadow: black 2px 2px 3px; font-size: x-large; padding: 6px;">
+                Go
+            </button>
+        </div>
+
+    </ion-content>
 </ion-view>

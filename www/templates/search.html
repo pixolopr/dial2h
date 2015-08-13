@@ -1,5 +1,12 @@
 <ion-view view-title="Search">
-  <ion-content>
-    <h1>Home Page</h1>
-  </ion-content>
+    <ion-nav-bar class="bar-energized ">
+        <ion-nav-buttons side="left">
+            <button menu-toggle="left" class="button icon ion-navicon"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content>
+        <h1>Select</h1>
+        <button ng-click="getvehicles('tourist')">Tourist</button>
+        <button ng-click="getvehicles('transporter')">Transporter</button>
+    </ion-content>
 </ion-view>
