@@ -120,6 +120,16 @@ background-color: #F58220;
 
 /*search page*/
 
+.selected
+{
+    background-color: orange;
+     border: white 6px double !important;
+}
+.deselected
+{
+    background-color: grey;
+      border: white 6px double !important;
+}
 .taxi
 {
     display: inline-block;
@@ -129,10 +139,10 @@ background-color: #F58220;
     font-size: large;
     border-radius: 71px;
     padding: 11px;
-    border: #F58220 6px double !important;
+   
     font-weight: 400;
     color: black;
-        background-color: grey;
+        
 }
 
 .line

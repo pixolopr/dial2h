@@ -77,6 +77,9 @@ angular.module('starter.controllers', [])
         };
     })
     .controller('searchCtrl', function ($scope, $stateParams, $location) {
+    
+    $scope.cartypes=[true, false, false, false];
+    
         $scope.getvehicles = function (type) {
             $location.path("/app/vehiclelist/" + type);
         };
