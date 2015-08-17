@@ -5,8 +5,40 @@
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content>
-        <h1>Select</h1>
-        <button ng-click="getvehicles('tourist')">Tourist</button>
-        <button ng-click="getvehicles('transporter')">Transporter</button>
+        
+        <div style="text-align:center;">
+       <img src="img/logo.png" alt="">
+        </div>
+        <div class="line"></div>
+   <div class="row">
+         <div class="col ">
+             <div class="taxi ion-model-s"></div>
+         </div>
+        <div class="col ">
+             <div class="taxi ion-model-s"></div>
+         </div>
+        <div class="col ">
+             <div class="taxi ion-model-s"></div>
+         </div>
+        <div class="col ">
+             <div class="taxi ion-model-s"></div>
+         </div>
+       </div>
+        
+        <div class="list list-inset">
+  <label class="item item-input">
+    <i class="icon ion-search placeholder-icon"></i>
+    <input type="text" placeholder="Current location">
+  </label>
+</div>
+         <div style="padding-left: 43%;">
+
+            <button ng-click="signup()" class="button  gobutton" style="box-shadow: black 2px 2px 3px; font-size: x-large; padding: 6px;">
+                Go
+            </button>
+        </div>
+
+        <!--<button ng-click="getvehicles('tourist')">Tourist</button>
+        <button ng-click="getvehicles('transporter')">Transporter</button>-->
     </ion-content>
 </ion-view>
