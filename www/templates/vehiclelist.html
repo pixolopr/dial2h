@@ -2,8 +2,9 @@
 
 
     <ion-content data-tap-disabled="true">
-        <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
-        <div ng-show="false">
+
+        <ui-gmap-google-map ng-if="tab" center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+        <div ng-if="!tab">
             <ul class="list">
                 <li class="item" ng-repeat="vehicle in vehicledata">
                     <div class="row">
@@ -25,6 +26,15 @@
 
                 </li>
             </ul>
+        </div>
+        <div class="tabbuttons">
+            <button ng-click="tab=false" class="button gobutton gobutton2">
+                List
+            </button>
+            <button ng-click="tab=true" class="button gobutton gobutton2">
+                Map
+            </button>
+
         </div>
     </ion-content>
 </ion-view>

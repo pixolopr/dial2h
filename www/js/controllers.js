@@ -133,9 +133,11 @@ angular.module('starter.controllers', [])
     .controller('vehiclelistCtrl', function ($scope, $stateParams, $location, MyServices, $ionicLoading, $ionicSideMenuDelegate) {
 
         //PAGE SETUP
-        //CAN DRAP CONTENT FOR MENU - TRUE
+        //CAN DRAG CONTENT FOR MENU - TRUE
         $ionicSideMenuDelegate.canDragContent(true);
         console.log($ionicSideMenuDelegate.canDragContent(true));
+        //TAB TO SHOW VARIABLE
+        $scope.tab = false;
 
         var type = $stateParams.type;
 

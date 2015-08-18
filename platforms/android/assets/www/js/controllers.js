@@ -77,16 +77,67 @@ angular.module('starter.controllers', [])
         };
     })
     .controller('searchCtrl', function ($scope, $stateParams, $location) {
+
+
+        $scope.vehicletypes = [{
+                id: 1,
+                selected: true,
+                icon: "ion-model-s",
+                image: "img/rickshaw_display_pic.png",
+                value: "tourist"
+    },
+            {
+                id: 2,
+                selected: false,
+                icon: "ion-model-s",
+                image: "img/taxi_display_pic.png",
+                value: "tourist"
+    },
+            {
+                id: 3,
+                selected: false,
+                icon: "ion-model-s",
+                image: "img/rickshaw_display_pic.png",
+                value: "transporter"
+    },
+            {
+                id: 4,
+                selected: false,
+                icon: "ion-model-s",
+                image: "img/taxi_display_pic.png",
+                value: "transporter"
+    }];
+
+        $scope.showimage = $scope.vehicletypes[0].image;
+
+        $scope.selectvehicle = function (id) {
+            for (var q = 0; q < $scope.vehicletypes.length; q++) {
+                if (id == $scope.vehicletypes[q].id) {
+                    $scope.vehicletypes[q].selected = true;
+                    $scope.showimage = $scope.vehicletypes[q].image;
+                } else {
+                    $scope.vehicletypes[q].selected = false;
+                };
+            };
+        };
+
         $scope.getvehicles = function (type) {
+            for (var w = 0; w < $scope.vehicletypes.length; w++) {
+                if ($scope.vehicletypes[w].selected == true) {
+                    var type = $scope.vehicletypes[w].value
+                };
+            };
             $location.path("/app/vehiclelist/" + type);
         };
     })
     .controller('vehiclelistCtrl', function ($scope, $stateParams, $location, MyServices, $ionicLoading, $ionicSideMenuDelegate) {
 
         //PAGE SETUP
-        //CAN DRAP CONTENT FOR MENU - TRUE
+        //CAN DRAG CONTENT FOR MENU - TRUE
         $ionicSideMenuDelegate.canDragContent(true);
         console.log($ionicSideMenuDelegate.canDragContent(true));
+        //TAB TO SHOW VARIABLE
+        $scope.tab = false;
 
         var type = $stateParams.type;
 
@@ -104,4 +155,14 @@ angular.module('starter.controllers', [])
             longitude: "23.50"
         };
         MyServices.getvehiclesbytype(type, location).success(getvehiclesbytypesuccess);
+
+        $scope.map = {
+            center: {
+                latitude: 18.9750,
+                longitude: 72.8258
+            },
+            zoom: 8
+        };
+
+
     });

@@ -56,6 +56,12 @@
     background-color: #F9790B;
     color: black;
 }
+
+.gobutton2 {
+    box-shadow: black 2px 2px 3px;
+    font-size: x-large;
+    padding: 6px;
+}
 /*otp page*/
 
 .otpbg {
@@ -158,4 +164,12 @@
 
 .angular-google-map-container {
     height: 100%;
+}
+
+.tabbuttons {
+    position: fixed;
+    top: 76%;
+    text-align: center;
+    margin-left: 50%;
+    transform: translateX(-50%);
 }

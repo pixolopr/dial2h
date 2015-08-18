@@ -1,27 +1,40 @@
 <ion-view view-title="Vehicles">
 
 
-    <ion-content>
-        <ul class="list">
-            <li class="item" ng-repeat="vehicle in vehicledata">
-                <div class="row">
-                    <div class="col col-25">
-                        <img src="{{vehicle.vehiclephoto}}" width="100%" />
-                    </div>
-                    <div class="col col-50">
-                        <div>{{vehicle.vendorname}}</div>
-                        <div>{{vehicle.vehiclemake +" "+ vehicle.vehiclemodel}}</div>
-                        <div>{{vehicle.preferedroute}}</div>
-                    </div>
-                    <div class="col col-25" style="text-align:center">
-                        <div>{{vehicle.vendorid}}</div>
-                        <div>{{vehicle.ton}} Ton</div>
-                        <div>Trolley Length</div>
-                        <div>{{vehicle.trollylength}}</div>
-                    </div>
-                </div>
+    <ion-content data-tap-disabled="true">
 
-            </li>
-        </ul>
+        <ui-gmap-google-map ng-if="tab" center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+        <div ng-if="!tab">
+            <ul class="list">
+                <li class="item" ng-repeat="vehicle in vehicledata">
+                    <div class="row">
+                        <div class="col col-25">
+                            <img src="{{vehicle.vehiclephoto}}" width="100%" />
+                        </div>
+                        <div class="col col-50">
+                            <div>{{vehicle.vendorname}}</div>
+                            <div>{{vehicle.vehiclemake +" "+ vehicle.vehiclemodel}}</div>
+                            <div>{{vehicle.preferedroute}}</div>
+                        </div>
+                        <div class="col col-25" style="text-align:center">
+                            <div>{{vehicle.vendorid}}</div>
+                            <div>{{vehicle.ton}} Ton</div>
+                            <div>Trolley Length</div>
+                            <div>{{vehicle.trollylength}}</div>
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+        <div class="tabbuttons">
+            <button ng-click="tab=false" class="button gobutton gobutton2">
+                List
+            </button>
+            <button ng-click="tab=true" class="button gobutton gobutton2">
+                Map
+            </button>
+
+        </div>
     </ion-content>
 </ion-view>
