@@ -78,7 +78,7 @@ angular.module('starter.controllers', [])
     })
     .controller('searchCtrl', function ($scope, $stateParams, $location) {
 
-        
+
         $scope.vehicletypes = [{
                 id: 1,
                 selected: true,
@@ -107,8 +107,8 @@ angular.module('starter.controllers', [])
                 image: "img/taxi_display_pic.png",
                 value: "transporter"
     }];
-    
-    $scope.showimage = $scope.vehicletypes[0].image;
+
+        $scope.showimage = $scope.vehicletypes[0].image;
 
         $scope.selectvehicle = function (id) {
             for (var q = 0; q < $scope.vehicletypes.length; q++) {
@@ -153,4 +153,14 @@ angular.module('starter.controllers', [])
             longitude: "23.50"
         };
         MyServices.getvehiclesbytype(type, location).success(getvehiclesbytypesuccess);
+
+        $scope.map = {
+            center: {
+                latitude: 18.9750,
+                longitude: 72.8258
+            },
+            zoom: 8
+        };
+
+
     });

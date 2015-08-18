@@ -1,27 +1,30 @@
 <ion-view view-title="Vehicles">
 
 
-    <ion-content>
-        <ul class="list">
-            <li class="item" ng-repeat="vehicle in vehicledata">
-                <div class="row">
-                    <div class="col col-25">
-                        <img src="{{vehicle.vehiclephoto}}" width="100%" />
+    <ion-content data-tap-disabled="true">
+        <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+        <div ng-show="false">
+            <ul class="list">
+                <li class="item" ng-repeat="vehicle in vehicledata">
+                    <div class="row">
+                        <div class="col col-25">
+                            <img src="{{vehicle.vehiclephoto}}" width="100%" />
+                        </div>
+                        <div class="col col-50">
+                            <div>{{vehicle.vendorname}}</div>
+                            <div>{{vehicle.vehiclemake +" "+ vehicle.vehiclemodel}}</div>
+                            <div>{{vehicle.preferedroute}}</div>
+                        </div>
+                        <div class="col col-25" style="text-align:center">
+                            <div>{{vehicle.vendorid}}</div>
+                            <div>{{vehicle.ton}} Ton</div>
+                            <div>Trolley Length</div>
+                            <div>{{vehicle.trollylength}}</div>
+                        </div>
                     </div>
-                    <div class="col col-50">
-                        <div>{{vehicle.vendorname}}</div>
-                        <div>{{vehicle.vehiclemake +" "+ vehicle.vehiclemodel}}</div>
-                        <div>{{vehicle.preferedroute}}</div>
-                    </div>
-                    <div class="col col-25" style="text-align:center">
-                        <div>{{vehicle.vendorid}}</div>
-                        <div>{{vehicle.ton}} Ton</div>
-                        <div>Trolley Length</div>
-                        <div>{{vehicle.trollylength}}</div>
-                    </div>
-                </div>
 
-            </li>
-        </ul>
+                </li>
+            </ul>
+        </div>
     </ion-content>
 </ion-view>
