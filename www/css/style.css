@@ -1,76 +1,69 @@
 /* Empty. Add your own CSS if you like */
-.headcolor{
-color: #FF6F11 !important;
+
+.headcolor {
+    color: #FF6F11 !important;
 }
 
-.loginbg
-{
-    
- background: url(../img/bg2.png) no-repeat center center fixed; 
- -webkit-background-size: cover;
- -moz-background-size: cover;
- -o-background-size: cover;
-  background-size: cover;
-    
-}
-.signupbg
-{
-background-color: white;
+.loginbg {
+    background: url(../img/bg2.png) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
+.signupbg {
+    background-color: white;
+}
 /*signup page*/
+
 .item1 {
-  border-color: #ddd;
- /* background-color: #fff;*/
-  color: #444;
-  position: relative;
-  z-index: 2;
-  display: block;
-  margin: -1px;
-  padding: 16px;
-  font-size: 16px; }
-
-.border
-{
-border-bottom: #0079c1 3px solid;
+    border-color: #ddd;
+    /* background-color: #fff;*/
+    
+    color: #444;
+    position: relative;
+    z-index: 2;
+    display: block;
+    margin: -1px;
+    padding: 16px;
+    font-size: 16px;
 }
 
-
-.signup
-{
-text-align: center;
-font-size: larger !importantn;  
+.border {
+    border-bottom: #0079c1 3px solid;
 }
 
-.signupbox
-{
-padding: 5%;
+.signup {
+    text-align: center;
+    font-size: larger !importantn;
 }
 
-.gobutton
-{
-      width: 75px;
+.signupbox {
+    padding: 5%;
+}
+
+.gobutton {
+    width: 75px;
     top: 4vh;
     height: 75px;
     border-radius: 100%;
     padding: 11px;
     border: #EAEAF1 6px double !important;
     /* font-weight: 900; */
+    
     border-color: #F58220;
     background-color: #F9790B;
     color: black;
 }
-
 /*otp page*/
 
-.otpbg
-{
-background-color: #F58220;
+.otpbg {
+    background-color: #F58220;
 }
 
-.gobutton2
-{
-       width: 75px;
+.gobutton2 {
+    width: 75px;
     height: 75px;
     top: 5vh;
     font-size: large;
@@ -80,58 +73,59 @@ background-color: #F58220;
     font-weight: 400;
     color: black;
 }
-.resendbutton
-{
+
+.resendbutton {
     border-color: white;
     background: transparent;
     color: white;
 }
-.thankyou
-{
-   
+
+.thankyou {
     margin-top: 4vh;
     font-weight: 200;
     color: white;
     font-size: large;
 }
-.thankyou2
-{
-       
+
+.thankyou2 {
     font-weight: 100;
     color: #060606;
 }
 
-.thankyou3
-{
-  
-   
+.thankyou3 {
     font-weight: 100;
     color: #060606;
 }
 
 .entercode {
-  border-color: red !important;
-  color: red !important;
-  position: relative;
-  z-index: 2;
-  display: block;
-  
+    border-color: red !important;
+    color: red !important;
+    position: relative;
+    z-index: 2;
+    display: block;
 }
-
 /*search page*/
 
-.selected
-{
-    background-color: orange;
-     border: white 6px double !important;
+.selected {
+    background-size: 780%;
+    background-position-x: 50%;
+    background-position-y: 50%;
 }
-.deselected
-{
-    background-color: grey;
-      border: white 6px double !important;
+
+.deselected {
+    background-size: 70%;
+    background-position-x: 50%;
+    background-position-y: 50%;
 }
-.taxi
-{
+
+.taxi {
+    background-image: url("../img/btnbg.png");
+    border: white 6px double !important;
+    
+    -webkit-transition: background-position-y 0.7s, background-position-z 0.7s, background-size 0.7s;
+    transition: background-position-y 0.7s, background-position-z 0.7s, background-size 0.7s;
+    transition-timing-function: ease-out;
+    
     display: inline-block;
     width: 50px;
     height: 50px;
@@ -139,20 +133,18 @@ background-color: #F58220;
     font-size: large;
     border-radius: 71px;
     padding: 11px;
-   
     font-weight: 400;
     color: black;
-        
 }
 
-.line
-{
+.line {
     width: 90%;
     border-radius: 100%;
     height: 10px;
     position: absolute;
     margin-top: 27px;
     /* margin-left: 21px; */
+    
     background-color: grey;
     z-index: -1;
 }

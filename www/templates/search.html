@@ -5,35 +5,26 @@
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content>
-        
+
         <div style="text-align:center;">
-       <img src="img/logo.png" alt="">
+            <img src="{{showimage}}" width="55%">
         </div>
         <div class="line"></div>
-   <div class="row">
-         <div class="col ">
-             <div class="taxi  ion-model-s" ng-class="{selected:cartypes[0], deselected:!cartypes[0]}"></div>
-         </div>
-        <div class="col ">
-             <div class="taxi  ion-model-s" ng-class="{selected:cartypes[1], deselected:!cartypes[1]}" ng-click="cartypes[1]=!cartypes[1]"></div>
-         </div>
-        <div class="col ">
-             <div class="taxi  ion-model-s" ng-class="{selected:cartypes[2], deselected:!cartypes[2]}"></div>
-         </div>
-        <div class="col  ">
-             <div class="taxi  ion-model-s" ng-class="{selected:cartypes[3], deselected:!cartypes[3]}"></div>
-         </div>
-       </div>
-        
-        <div class="list list-inset">
-  <label class="item item-input">
-    <i class="icon ion-search placeholder-icon"></i>
-    <input type="text" placeholder="Current location">
-  </label>
-</div>
-         <div style="padding-left: 43%;">
+        <div class="row">
+            <div class="col" ng-repeat="vehicle in vehicletypes">
+                <div class="taxi  {{vehicle.icon}}" ng-class="{selected:vehicle.selected, deselected:!vehicle.selected}" ng-click="selectvehicle(vehicle.id)"></div>
+            </div>
+        </div>
 
-            <button ng-click="signup()" class="button  gobutton" style="box-shadow: black 2px 2px 3px; font-size: x-large; padding: 6px;">
+        <div class="list list-inset">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="Current location">
+            </label>
+        </div>
+        <div style="padding-left: 43%;">
+
+            <button ng-click="getvehicles()" class="button gobutton" style="box-shadow: black 2px 2px 3px; font-size: x-large; padding: 6px;">
                 Go
             </button>
         </div>
