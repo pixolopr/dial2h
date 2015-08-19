@@ -18,9 +18,9 @@
                         </div>
                         <div class="col col-25" style="text-align:center">
                             <div>{{vehicle.vendorid}}</div>
-                            <div>{{vehicle.ton}} Ton</div>
-                            <div>Trolley Length</div>
-                            <div>{{vehicle.trollylength}}</div>
+                            <div ng-if="vehicle.ton">{{vehicle.ton}} Ton</div>
+                            <div  ng-if="vehicle.ton">Trolley Length</div>
+                            <div  ng-if="vehicle.ton">{{vehicle.trollylength}}</div>
                         </div>
                     </div>
 

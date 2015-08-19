@@ -3,7 +3,6 @@
 .headcolor {
     color: #FF6F11 !important;
 }
-
 .loginbg {
     background: url(../img/bg2.png) no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -11,16 +10,15 @@
     -o-background-size: cover;
     background-size: cover;
 }
-
 .signupbg {
     background-color: white;
 }
+
 /*signup page*/
 
 .item1 {
     border-color: #ddd;
     /* background-color: #fff;*/
-    
     color: #444;
     position: relative;
     z-index: 2;
@@ -29,20 +27,16 @@
     padding: 16px;
     font-size: 16px;
 }
-
 .border {
     border-bottom: #0079c1 3px solid;
 }
-
 .signup {
     text-align: center;
     font-size: larger !importantn;
 }
-
 .signupbox {
     padding: 5%;
 }
-
 .gobutton {
     width: 75px;
     top: 4vh;
@@ -51,23 +45,21 @@
     padding: 11px;
     border: #EAEAF1 6px double !important;
     /* font-weight: 900; */
-    
     border-color: #F58220;
     background-color: #F9790B;
     color: black;
 }
-
 .gobutton3 {
     box-shadow: black 2px 2px 3px;
     font-size: x-large;
     padding: 6px;
 }
+
 /*otp page*/
 
 .otpbg {
     background-color: #F58220;
 }
-
 .gobutton2 {
     width: 75px;
     height: 75px;
@@ -79,30 +71,25 @@
     font-weight: 400;
     color: black;
 }
-
 .resendbutton {
     border-color: white;
     background: transparent;
     color: white;
 }
-
 .thankyou {
     margin-top: 4vh;
     font-weight: 200;
     color: white;
     font-size: large;
 }
-
 .thankyou2 {
     font-weight: 100;
     color: #060606;
 }
-
 .thankyou3 {
     font-weight: 100;
     color: #060606;
 }
-
 .entercode {
     border-color: red !important;
     color: red !important;
@@ -110,21 +97,17 @@
     z-index: 2;
     display: block;
 }
+
 /*search page*/
 
 .selected {
-      background-size: 1522%;
-   
+    background-size: 1522%;
 }
-
 .deselected {
     background-size: 70%;
-   
 }
-
-.taxi 
-{
-      background-position-x: 50%;
+.taxi {
+    background-position-x: 50%;
     background-position-y: 50%;
     background-image: url("../img/btnbg.png");
     border: white 6px double !important;
@@ -143,7 +126,6 @@
     padding: 7%;
     padding-left: 4%;
 }
-
 .line {
     width: 90%;
     border-radius: 100%;
@@ -155,48 +137,36 @@
     background-color: grey;
     z-index: -1;
 }
-
-.tabselected
-{
-    border: #FFFFFF 6px double !important;
-   
-      background-color: rgba(7, 7, 7, 0.37);
-     box-shadow: black 0px 0px 0px;
-    width: 80px !important;
-    height: 80px !important;
-    
-}
-
-.tabdeselected
-{
-       border: #FFFFFF 6px double !important;
-   background-color: rgba(7, 7, 7, 0.58);
-    box-shadow: black 2px 2px 9px;
-     width: 75px !important;
+.tabselected {
+    border: #FFFFFF 4px double !important;
+    background-color: rgba(7, 7, 7, 0.37);
+    box-shadow: black 0px 0px 0px;
+    width: 75px !important;
     height: 75px !important;
 }
-
-.newtab
-{
-    
+.tabdeselected {
+    border: #FFFFFF 5px double !important;
+    background-color: rgba(7, 7, 7, 0.58);
+    box-shadow: black 2px 2px 9px;
+    width: 80px !important;
+    height: 80px !important;
+}
+.newtab {
     top: 4vh;
     border-radius: 100%;
     padding: 11px;
     color: black;
-    -webkit-transition: box-shadow 0.5s, background-color 0.5s;
-    transition: box-shadow 0.5s, background-color 0.5s;
+    -webkit-transition: box-shadow 0.5s, background-color 0.5s, width 0.6s, height 0.6s, border 0.5s;
+    transition: box-shadow 0.5s, background-color 0.5s, width 0.6s, height 0.6s, border 0.5s;
     transition-timing-function: ease-out;
 }
-
-.tabdist
-{
+.tabdist {
     font-size: 40px;
     margin-left: 49%;
     position: fixed;
 }
-.tabdist2
-{
-margin-left: -135%;
+.tabdist2 {
+    margin-left: -135%;
 }
 
 /*MAP*/
@@ -204,15 +174,12 @@ margin-left: -135%;
 .scroll {
     height: 100vh;
 }
-
 .angular-google-map {
     height: 100%;
 }
-
 .angular-google-map-container {
     height: 100%;
 }
-
 .tabbuttons {
     position: fixed;
     top: 70vh;
