@@ -168,7 +168,7 @@
 
 .tabbuttons {
     position: fixed;
-    top: 76%;
+    top: 70vh;
     text-align: center;
     margin-left: 50%;
     transform: translateX(-50%);
