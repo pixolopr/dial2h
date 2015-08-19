@@ -82,28 +82,28 @@ angular.module('starter.controllers', [])
         $scope.vehicletypes = [{
                 id: 1,
                 selected: true,
-                icon: "ion-model-s",
+                icon: "icon-car",
                 image: "img/rickshaw_display_pic.png",
                 value: "tourist"
     },
             {
                 id: 2,
                 selected: false,
-                icon: "ion-model-s",
+                icon: "icon-truck",
                 image: "img/taxi_display_pic.png",
                 value: "tourist"
     },
             {
                 id: 3,
                 selected: false,
-                icon: "ion-model-s",
+                icon: "icon-auto",
                 image: "img/rickshaw_display_pic.png",
                 value: "transporter"
     },
             {
                 id: 4,
                 selected: false,
-                icon: "ion-model-s",
+                icon: "icon-taxi",
                 image: "img/taxi_display_pic.png",
                 value: "transporter"
     }];

@@ -9,9 +9,9 @@
         <div style="text-align:center;">
             <img src="{{showimage}}" width="55%">
         </div>
-        <div class="line"></div>
+        <div class="line" style="text-align:center;"></div>
         <div class="row">
-            <div class="col" ng-repeat="vehicle in vehicletypes">
+            <div class="col" ng-repeat="vehicle in vehicletypes" style="text-align:center;">
                 <div class="taxi  {{vehicle.icon}}" ng-class="{selected:vehicle.selected, deselected:!vehicle.selected}" ng-click="selectvehicle(vehicle.id)"></div>
             </div>
         </div>
@@ -19,12 +19,12 @@
         <div class="list list-inset">
             <label class="item item-input">
                 <i class="icon ion-search placeholder-icon"></i>
-                <input type="text" placeholder="Current location">
+                <input type="text" placeholder="Current location" style="text-align: -webkit-center;">
             </label>
         </div>
         <div style="padding-left: 43%;">
 
-            <button ng-click="getvehicles()" class="button gobutton" style="box-shadow: black 2px 2px 3px; font-size: x-large; padding: 6px;">
+            <button ng-click="getvehicles()" class="button gobutton gobutton3">
                 Go
             </button>
         </div>

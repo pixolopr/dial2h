@@ -12,9 +12,9 @@
                             <img src="{{vehicle.vehiclephoto}}" width="100%" />
                         </div>
                         <div class="col col-50">
-                            <div>{{vehicle.vendorname}}</div>
-                            <div>{{vehicle.vehiclemake +" "+ vehicle.vehiclemodel}}</div>
-                            <div>{{vehicle.preferedroute}}</div>
+                            <div style="font-size: 21px;font-variant: small-caps;font-weight: 600;">{{vehicle.vendorname}}</div>
+                            <div style="">{{vehicle.vehiclemake +" "+ vehicle.vehiclemodel}}</div>
+                            <div style="color: #0079c0;">{{vehicle.preferedroute}}</div>
                         </div>
                         <div class="col col-25" style="text-align:center">
                             <div>{{vehicle.vendorid}}</div>
@@ -28,10 +28,10 @@
             </ul>
         </div>
         <div class="tabbuttons">
-            <button ng-click="tab=false" class="button gobutton gobutton2 ion-ios-list-outline" style="font-size:40px;">
+            <button ng-click="tab=false" class="button newtab tabdist2  gobutton2 ion-ios-list-outline" style="font-size:40px;" ng-class="{tabselected:tab, tabdeselected:!tab}">
                 
             </button>
-            <button ng-click="tab=true" class="button gobutton gobutton2 ion-map " style="font-size:40px;">
+            <button ng-click="tab=true" class="button newtab tabdist  gobutton2 ion-map " style="font-size:40px;" ng-class="{tabselected:!tab, tabdeselected:tab}">
                 
             </button>
 

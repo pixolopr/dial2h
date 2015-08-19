@@ -57,7 +57,7 @@
     color: black;
 }
 
-.gobutton2 {
+.gobutton3 {
     box-shadow: black 2px 2px 3px;
     font-size: x-large;
     padding: 6px;
@@ -113,18 +113,19 @@
 /*search page*/
 
 .selected {
-    background-size: 780%;
-    background-position-x: 50%;
-    background-position-y: 50%;
+      background-size: 1522%;
+   
 }
 
 .deselected {
     background-size: 70%;
-    background-position-x: 50%;
-    background-position-y: 50%;
+   
 }
 
-.taxi {
+.taxi 
+{
+      background-position-x: 50%;
+    background-position-y: 50%;
     background-image: url("../img/btnbg.png");
     border: white 6px double !important;
     -webkit-transition: background-position-y 0.7s, background-position-z 0.7s, background-size 0.7s;
@@ -134,11 +135,13 @@
     width: 50px;
     height: 50px;
     top: 5vh;
-    font-size: large;
     border-radius: 71px;
     padding: 11px;
     font-weight: 400;
     color: black;
+    font-size: 237%;
+    padding: 7%;
+    padding-left: 4%;
 }
 
 .line {
@@ -148,14 +151,58 @@
     position: absolute;
     margin-top: 27px;
     /* margin-left: 21px; */
-    
+    margin-left: 5%;
     background-color: grey;
     z-index: -1;
 }
+
+.tabselected
+{
+    border: #FFFFFF 6px double !important;
+   
+      background-color: rgba(7, 7, 7, 0.37);
+     box-shadow: black 0px 0px 0px;
+    width: 80px !important;
+    height: 80px !important;
+    
+}
+
+.tabdeselected
+{
+       border: #FFFFFF 6px double !important;
+   background-color: rgba(7, 7, 7, 0.58);
+    box-shadow: black 2px 2px 9px;
+     width: 75px !important;
+    height: 75px !important;
+}
+
+.newtab
+{
+    
+    top: 4vh;
+    border-radius: 100%;
+    padding: 11px;
+    color: black;
+    -webkit-transition: box-shadow 0.5s, background-color 0.5s;
+    transition: box-shadow 0.5s, background-color 0.5s;
+    transition-timing-function: ease-out;
+}
+
+.tabdist
+{
+    font-size: 40px;
+    margin-left: 49%;
+    position: fixed;
+}
+.tabdist2
+{
+margin-left: -135%;
+}
+
 /*MAP*/
 
 .scroll {
-    height: 100%;
+    height: 100vh;
 }
 
 .angular-google-map {
@@ -169,6 +216,7 @@
 .tabbuttons {
     position: fixed;
     top: 70vh;
+    z-index: 2;
     text-align: center;
     margin-left: 50%;
     transform: translateX(-50%);
