@@ -83,14 +83,14 @@ angular.module('starter.controllers', [])
                 id: 1,
                 selected: true,
                 icon: "icon-car",
-                image: "img/rickshaw_display_pic.png",
+                image: "img/car_display_pic.png",
                 value: "tourist"
     },
             {
                 id: 2,
                 selected: false,
                 icon: "icon-truck",
-                image: "img/taxi_display_pic.png",
+                image: "img/truck_display_pic.png",
                 value: "tourist"
     },
             {

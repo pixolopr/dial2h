@@ -71,6 +71,9 @@
     font-weight: 400;
     color: black;
 }
+.gobutton2:hover{
+color:transparent;
+}
 .resendbutton {
     border-color: white;
     background: transparent;
@@ -122,19 +125,20 @@
     padding: 11px;
     font-weight: 400;
     color: black;
-    font-size: 237%;
-    padding: 7%;
-    padding-left: 4%;
+   font-size: 4vh;
+    padding: 1%;
+    padding-left: 1%;
+    padding-top: 2vh;
 }
 .line {
-    width: 90%;
-    border-radius: 100%;
-    height: 10px;
+      width: 90%;
+    /* border-radius: 100%; */
+    height: 4px;
     position: absolute;
-    margin-top: 27px;
-    /* margin-left: 21px; */
+    margin-top: 5vh;
+    background-color: rgb(215, 210, 206);
     margin-left: 5%;
-    background-color: grey;
+    border: rgba(128, 128, 128, 0.34) 1px double;
     z-index: -1;
 }
 .tabselected {
@@ -169,6 +173,10 @@
     margin-left: -135%;
 }
 
+.bg
+{
+    background-color: rgba(128, 128, 128, 0.33);
+}
 /*MAP*/
 
 .scroll {
@@ -188,3 +196,4 @@
     margin-left: 50%;
     transform: translateX(-50%);
 }
+
