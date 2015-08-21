@@ -3,10 +3,13 @@
 
     <ion-content data-tap-disabled="true" class="bg">
 
-        <ui-gmap-google-map ng-if="tab" center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+        <ui-gmap-google-map ng-if="tab" center='map.center' zoom='map.zoom'>
+            <ui-gmap-marker ng-repeat="mark in markers" idKey='mark.id' coords='mark.location' icon="img/ionic.png">
+            </ui-gmap-marker>
+        </ui-gmap-google-map>
         <div ng-if="!tab">
             <ul class="list">
-                <li class="item" ng-repeat="vehicle in vehicledata" style="margin:1vh;border: rgba(128, 128, 128, 0.43) 5px double;" >
+                <li class="item" ng-repeat="vehicle in vehicledata" style="margin:1vh;border: rgba(128, 128, 128, 0.43) 5px double;">
                     <div class="row">
                         <div class="col col-25">
                             <img src="{{vehicle.vehiclephoto}}" width="100%" />
@@ -20,19 +23,20 @@
                             <div>{{vehicle.vendorid}}</div>
                             <div style="font-size:14px;" ng-if="vehicle.ton">{{vehicle.ton}} Ton</div>
                             <div style="font-size:12px;" ng-if="vehicle.ton">Trolley Length</div>
-                            <div  ng-if="vehicle.ton">{{vehicle.trollylength}}</div>
+                            <div ng-if="vehicle.ton">{{vehicle.trollylength}}</div>
                         </div>
                     </div>
 
                 </li>
             </ul>
         </div>
-        <div class="tabbuttons"> <!--ion-ios-list-outline-->
+        <div class="tabbuttons">
+            <!--ion-ios-list-outline-->
             <button ng-click="tab=false" class="button newtab tabdist2  gobutton2 " style="font-size:40px;" ng-class="{tabselected:tab, tabdeselected:!tab}">
                 <img src="img/list.png" style="width: 66%;">
             </button>
             <button ng-click="tab=true" class="button newtab tabdist  gobutton2 " style="font-size:40px;" ng-class="{tabselected:!tab, tabdeselected:tab}">
-                 <img src="img/map.png" style="width: 100%;">
+                <img src="img/map.png" style="width: 100%;">
             </button>
 
         </div>

@@ -164,5 +164,28 @@ angular.module('starter.controllers', [])
             zoom: 8
         };
 
+        $scope.markers = [];
+
+        var marker1 = {
+            "id": 1,
+            "location": {
+                "latitude": 18.9750,
+                "longitude": 72.8258
+            },
+            "icon": "../img/rickshaw_display_pic.png"
+
+        };
+        var marker2 = {
+            "id": 2,
+            "location": {
+                "latitude": 18.9725,
+                "longitude": 72.8240
+            },
+            "icon": "../img/rickshaw_display_pic.png"
+        };
+
+        $scope.markers.push(marker1);
+        $scope.markers.push(marker2);
+
 
     });
