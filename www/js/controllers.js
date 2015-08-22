@@ -199,14 +199,41 @@ angular.module('starter.controllers', [])
         var marker2 = {
             "id": 2,
             "location": {
-                "latitude": 18.9725,
-                "longitude": 72.8240
+                "latitude": 18.2725,
+                "longitude": 72.9240
             },
             "icon": "../img/rickshaw_display_pic.png"
         };
 
         $scope.markers.push(marker1);
         $scope.markers.push(marker2);
+
+        //CIRCLE
+        $scope.circles = [
+            {
+                id: 1,
+                center: {
+                    "latitude": 18.9725,
+                    "longitude": 72.8240
+                },
+                radius: 500000,
+                stroke: {
+                    color: '#08B21F',
+                    weight: 2,
+                    opacity: 1
+                },
+                fill: {
+                    color: '#08B21F',
+                    opacity: 0.5
+                },
+                geodesic: true, // optional: defaults to false
+                draggable: true, // optional: defaults to false
+                clickable: true, // optional: defaults to true
+                editable: true, // optional: defaults to false
+                visible: true, // optional: defaults to true
+                control: {}
+            }
+        ];
 
 
     });
