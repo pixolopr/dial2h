@@ -76,8 +76,13 @@ angular.module('starter.controllers', [])
             MyServices.signupuser($scope.signupdata).success(signupsuccess);
         };
     })
-    .controller('searchCtrl', function ($scope, $stateParams, $location) {
+    .controller('searchCtrl', function ($scope, $stateParams, $location, $http) {
 
+
+        $scope.input = {};
+        $scope.input.placeinput;
+
+        $scope.gPlace;
 
         $scope.vehicletypes = [{
                 id: 1,
@@ -121,13 +126,29 @@ angular.module('starter.controllers', [])
             };
         };
 
+
+
         $scope.getvehicles = function (type) {
-            for (var w = 0; w < $scope.vehicletypes.length; w++) {
-                if ($scope.vehicletypes[w].selected == true) {
-                    var type = $scope.vehicletypes[w].value
+            var input = $('#inp').val();
+            console.log(input);
+            $http.get("http://maps.google.com/maps/api/geocode/json", {
+                params: {
+                    address: input,
+                    sensor: false
+                }
+            }).success(function (data, status) {
+                console.log(data.results[0].geometry.location);
+                for (var w = 0; w < $scope.vehicletypes.length; w++) {
+                    if ($scope.vehicletypes[w].selected == true) {
+                        var type = $scope.vehicletypes[w].value
+                    };
                 };
-            };
-            $location.path("/app/vehiclelist/" + type);
+                $location.path("/app/vehiclelist/" + type);
+            });
+
+
+
+
         };
     })
     .controller('vehiclelistCtrl', function ($scope, $stateParams, $location, MyServices, $ionicLoading, $ionicSideMenuDelegate) {

@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'myservices','uiGmapgoogle-maps'])
+angular.module('starter', ['ionic', 'starter.controllers', 'myservices','uiGmapgoogle-maps','google.places'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -98,4 +98,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'myservices','uiGmapg
         });
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/search');
-});
+})
+.directive('googleplace', function() {
+    return {
+        require: 'ngModel',
+        link: function(scope, element, attrs, model) {
+            var options = {
+                types: [],
+                componentRestrictions: {country: 'in'}
+            };
+            scope.gPlace = new google.maps.places.Autocomplete(element[0], options);
+
+            google.maps.event.addListener(scope.gPlace, 'place_changed', function() {
+                scope.$apply(function() {
+                    model.$setViewValue(element.val());                
+                });
+            });
+        }
+    };
+});;

@@ -4,7 +4,7 @@
             <button menu-toggle="left" class="button icon ion-navicon"></button>
         </ion-nav-buttons>
     </ion-nav-bar>
-    <ion-content >
+    <ion-content>
 
         <div style="text-align:center;">
             <img src="{{showimage}}" width="55%">
@@ -19,8 +19,10 @@
         <div class="list list-inset">
             <label class="item item-input">
                 <i class="icon ion-search placeholder-icon"></i>
-                <input type="text" placeholder="Current location" style="text-align: -webkit-center;">
+                <input ng-model="placeinput" id="inp" placeholder="Current location" style="text-align: -webkit-center;border: 0px;" googleplace/>
             </label>
+            
+            
         </div>
         <div style="padding-left: 43%;">
 
@@ -28,8 +30,5 @@
                 Go
             </button>
         </div>
-
-        <!--<button ng-click="getvehicles('tourist')">Tourist</button>
-        <button ng-click="getvehicles('transporter')">Transporter</button>-->
     </ion-content>
 </ion-view>
