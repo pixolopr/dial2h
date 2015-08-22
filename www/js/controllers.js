@@ -138,6 +138,8 @@ angular.module('starter.controllers', [])
                 }
             }).success(function (data, status) {
                 console.log(data.results[0].geometry.location);
+                console.log(data.results[0].geometry.viewport.northeast);
+                console.log(data.results[0].geometry.viewport.southwest);
                 for (var w = 0; w < $scope.vehicletypes.length; w++) {
                     if ($scope.vehicletypes[w].selected == true) {
                         var type = $scope.vehicletypes[w].value
