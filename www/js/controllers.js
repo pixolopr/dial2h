@@ -147,11 +147,8 @@ angular.module('starter.controllers', [])
                 };
                 $location.path("/app/vehiclelist/" + type);
             });
-
-
-
-
         };
+
     })
     .controller('vehiclelistCtrl', function ($scope, $stateParams, $location, MyServices, $ionicLoading, $ionicSideMenuDelegate) {
 
@@ -236,6 +233,40 @@ angular.module('starter.controllers', [])
                 control: {}
             }
         ];
+
+        //RECTANGLE
+        $scope.bounds = {
+            ne: {
+                latitude: 18.9750,
+                longitude: 73.8258
+            },
+            sw: {
+                latitude: 19.9725,
+                longitude: 72.8240
+            }
+        };
+
+        $scope.disableTap = function () {
+            console.log("focus");
+            container = document.getElementsByClassName('pac-container');
+            // disable ionic data tab
+            angular.element(container).attr('data-tap-disabled', 'true');
+            // leave input field if google-address-entry is selected
+            angular.element(container).on("click", function () {
+                document.getElementById('inp').blur();
+            });
+        };
+
+        var input = document.getElementById('inp');
+        var options = { //options for autocomplete object
+            types: ['geocode']
+        };
+        autocomplete = new google.maps.places.Autocomplete(input, options);
+
+        $scope.boundsChanged = function (event) {
+            console.log("CHANGED")
+        };
+
 
 
     });
