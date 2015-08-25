@@ -1,0 +1,47 @@
+<ion-view view-title="Vehicles">
+
+
+    <ion-content data-tap-disabled="true" class="bg">
+
+        <ui-gmap-google-map ng-if="tab" center='map.center' zoom='map.zoom'>
+            <ui-gmap-marker ng-repeat="mark in markers" idKey='mark.id' coords='mark.location'>
+            </ui-gmap-marker>
+            <ui-gmap-rectangle bounds="bounds" fill="'#FFFFFF .5'" draggable='true' editable='true'
+ on-bounds_changed="boundsChanged()"></ui-gmap-rectangle>
+            <!--<ui-gmap-circle ng-repeat="c in circles track by c.id" center="c.center" stroke="c.stroke" fill="c.fill" radius="c.radius" visible="c.visible" geodesic="c.geodesic" editable="c.editable" draggable="c.draggable"></ui-gmap-circle>-->
+        </ui-gmap-google-map>
+        <div ng-if="!tab">
+            <ul class="list">
+                <li class="item" ng-repeat="vehicle in vehicledata" style="margin:1vh;border: rgba(128, 128, 128, 0.43) 5px double;">
+                    <div class="row">
+                        <div class="col col-25">
+                            <img src="{{vehicle.vehiclephoto}}" width="100%" />
+                        </div>
+                        <div class="col col-50">
+                            <div style="font-size: 21px;font-variant: small-caps;font-weight: 600;">{{vehicle.vendorname}}</div>
+                            <div style="">{{vehicle.vehiclemake +" "+ vehicle.vehiclemodel}}</div>
+                            <div style="color: #0079c0;">{{vehicle.preferedroute}}</div>
+                        </div>
+                        <div class="col col-25" style="text-align:center">
+                            <div>{{vehicle.vendorid}}</div>
+                            <div style="font-size:14px;" ng-if="vehicle.ton">{{vehicle.ton}} Ton</div>
+                            <div style="font-size:12px;" ng-if="vehicle.ton">Trolley Length</div>
+                            <div ng-if="vehicle.ton">{{vehicle.trollylength}}</div>
+                        </div>
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+        <div class="tabbuttons">
+            <!--ion-ios-list-outline-->
+            <button ng-click="tab=false" class="button newtab tabdist2  gobutton2 " style="font-size:40px;" ng-class="{tabselected:tab, tabdeselected:!tab}">
+                <img src="img/list.png" style="width: 66%;">
+            </button>
+            <button ng-click="tab=true" class="button newtab tabdist  gobutton2 " style="font-size:40px;" ng-class="{tabselected:!tab, tabdeselected:tab}">
+                <img src="img/map.png" style="width: 100%;">
+            </button>
+
+        </div>
+    </ion-content>
+</ion-view>
