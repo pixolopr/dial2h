@@ -253,7 +253,13 @@ angular.module('starter.controllers', [])
         };
 
 
-
+        //////RECTANGLE/////////////////
+        $scope.boundsChanged = function (event) {
+            $scope.ne = this.getBounds().getNorthEast();
+            $scope.sw = this.getBounds().getSouthWest();
+            console.log($scope.ne);
+            console.log($scope.sw);
+        };
 
 
 
