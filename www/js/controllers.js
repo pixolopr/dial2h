@@ -200,9 +200,9 @@ angular.module('starter.controllers', [])
             console.log(data);
             $scope.vehicledata = data;
             $ionicLoading.hide();
-            setmap();
-            setmarkers();
-            setbounds();
+            //setmap();
+            //setmarkers();
+            //setbounds();
 
         };
         var getlist = function () {
