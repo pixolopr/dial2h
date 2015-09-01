@@ -131,81 +131,140 @@ angular.module('starter.controllers', [])
         $scope.getvehicles = function (type) {
             var input = $('#inp').val();
             console.log(input);
-            $http.get("http://maps.google.com/maps/api/geocode/json", {
-                params: {
-                    address: input,
-                    sensor: false
-                }
-            }).success(function (data, status) {
-                console.log(data.results[0].geometry.location);
-                console.log(data.results[0].geometry.viewport.northeast);
-                console.log(data.results[0].geometry.viewport.southwest);
-                for (var w = 0; w < $scope.vehicletypes.length; w++) {
-                    if ($scope.vehicletypes[w].selected == true) {
-                        var type = $scope.vehicletypes[w].value
-                    };
+            for (var w = 0; w < $scope.vehicletypes.length; w++) {
+                if ($scope.vehicletypes[w].selected == true) {
+                    var type = $scope.vehicletypes[w].value
                 };
-                $location.path("/app/vehiclelist/" + type);
-            });
+            };
+            $location.path("/app/vehiclelist/" + type + "/" + input);
         };
 
     })
-    .controller('vehiclelistCtrl', function ($scope, $stateParams, $location, MyServices, $ionicLoading, $ionicSideMenuDelegate) {
+    .controller('vehiclelistCtrl', function ($scope, $stateParams, $location, MyServices, $ionicLoading, $ionicSideMenuDelegate, $ionicPlatform, $cordovaDevice, $http, $cordovaGeolocation) {
 
-        //PAGE SETUP
+        //////PAGE SETUP///////
         //CAN DRAG CONTENT FOR MENU - TRUE
         $ionicSideMenuDelegate.canDragContent(true);
-        console.log($ionicSideMenuDelegate.canDragContent(true));
         //TAB TO SHOW VARIABLE
         $scope.tab = false;
+        ///////////////////////
 
+        //FETCH TYPE OF CAR AND LOCATION DETAILS
         var type = $stateParams.type;
+        var location = $stateParams.location;
+        console.log(location);
 
+        //SHOW LOADING SIGN
         $ionicLoading.show({
             template: 'Fetching Vehicles...'
         });
 
+        /////////////////////////////MAP/////////////////////////////
+        var setmap = function () {
+            var lat = $scope.location2.latitude + (($scope.location1.latitude - $scope.location2.latitude) / 2);
+            var lng = $scope.location2.longitude + (($scope.location1.longitude - $scope.location2.longitude) / 2);
+            console.log(lat);
+            $scope.map = {
+                center: {
+                    latitude: lat,
+                    longitude: lng
+                },
+                zoom: 13
+            };
+        };
+
+        ////RECTANGLE////
+        var setbounds = function () {
+            $scope.bounds = {
+                ne: $scope.location1,
+                sw: $scope.location2
+
+            };
+        };
+        /////MARKERS///////////
+        var setmarkers = function () {
+            for (var q = 0; q < $scope.vehicledata.length; q++) {
+                $scope.markers.push({
+                    "id": (q + 1),
+                    "location": {
+                        "latitude": $scope.vehicledata[q].latitude,
+                        "longitude": $scope.vehicledata[q].longitude
+                    },
+                    "icon": "../img/rickshaw_display_pic.png"
+
+                });
+            };
+        };
+        ////////FUNTION TO GET THE LIST OF VEHICLES/////
         var getvehiclesbytypesuccess = function (data, status) {
             console.log(data);
             $scope.vehicledata = data;
             $ionicLoading.hide();
-        };
-        var location = {
-            latitude: "19.50",
-            longitude: "23.50"
-        };
-        MyServices.getvehiclesbytype(type, location).success(getvehiclesbytypesuccess);
+            setmap();
+            setmarkers();
+            setbounds();
 
-        $scope.map = {
-            center: {
-                latitude: 18.9750,
-                longitude: 72.8258
-            },
-            zoom: 8
+        };
+        var getlist = function () {
+            console.log($scope.location1, $scope.location2);
+            MyServices.getvehiclesbytype(type, $scope.location1, $scope.location2).success(getvehiclesbytypesuccess);
+        };
+        ///////////////////////////
+
+        //GRAB RADIUS POSITIONS
+        $scope.location1 = {};
+        $scope.location2 = {};
+
+        if (location == "") {
+            var posOptions = {
+                timeout: 10000,
+                enableHighAccuracy: false
+            };
+            $cordovaGeolocation
+                .getCurrentPosition(posOptions)
+                .then(function (position) {
+                    var lat = position.coords.latitude;
+                    var long = position.coords.longitude;
+                    console.log(lat);
+                    $scope.location1.latitude = lat + 0.0300;
+                    $scope.location1.longitude = long + 0.0300;
+                    $scope.location2.latitude = lat - 0.0300;
+                    $scope.location2.longitude = long - 0.0300;
+
+                    getlist();
+
+                }, function (err) {
+                    alert("Unable to get your location");
+                    $ionicLoading.hide();
+                });
+        } else {
+            $http.get("http://maps.google.com/maps/api/geocode/json", {
+                params: {
+                    address: location,
+                    sensor: false
+                }
+            }).success(function (data, status) {
+                $scope.location1.latitude = data.results[0].geometry.viewport.northeast.lat;
+                $scope.location1.longitude = data.results[0].geometry.viewport.northeast.lng;
+                $scope.location2.latitude = data.results[0].geometry.viewport.southwest.lat;
+                $scope.location2.longitude = data.results[0].geometry.viewport.southwest.lng;
+                getlist();
+            });
         };
 
+
+        //////RECTANGLE/////////////////
+        $scope.boundsChanged = function (event) {
+            $scope.ne = this.getBounds().getNorthEast();
+            $scope.sw = this.getBounds().getSouthWest();
+            console.log($scope.ne);
+            console.log($scope.sw);
+        };
+
+
+
+        ////////////////MAP VARIABLES////////////
         $scope.markers = [];
-
-        var marker1 = {
-            "id": 1,
-            "location": {
-                "latitude": 18.9750,
-                "longitude": 72.8258
-            },
-            "icon": "../img/rickshaw_display_pic.png"
-
-        };
-        var marker2 = {
-            "id": 2,
-            "location": {
-                "latitude": 18.2725,
-                "longitude": 72.9240
-            },
-            "icon": "../img/rickshaw_display_pic.png"
-        };
-
-        $scope.markers.push(marker1);
-        $scope.markers.push(marker2);
 
         //CIRCLE
         $scope.circles = [
@@ -234,17 +293,7 @@ angular.module('starter.controllers', [])
             }
         ];
 
-        //RECTANGLE
-        $scope.bounds = {
-            ne: {
-                latitude: 18.9750,
-                longitude: 73.8258
-            },
-            sw: {
-                latitude: 19.9725,
-                longitude: 72.8240
-            }
-        };
+
 
         $scope.disableTap = function () {
             console.log("focus");

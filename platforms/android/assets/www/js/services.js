@@ -5,16 +5,16 @@ var myservices = angular.module('myservices', [])
 .factory('MyServices', function ($http, $location) {
 
     return {
-        getvehiclesbytype: function (type, location) {
-            return $http.get(adminurl + "vehicle_info/vehicleinfo", {
+        getvehiclesbytype: function (type, location1, location2) {
+            return $http.get(adminurl + "vehicle_details/vehicleinfo", {
                 params: {
-                    location: location,
+                    location1: location2,
+                    location2: location1,
                     type: type
                 }
             });
         },
-        signupuser: function(userdetails)
-        {
+        signupuser: function (userdetails) {
             return $http.get(adminurl + "users/addusers", {
                 params: {
                     data: userdetails
