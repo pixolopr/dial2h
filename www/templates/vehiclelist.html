@@ -1,20 +1,18 @@
 <ion-view view-title="Vehicles">
 
 
-    <ion-content data-tap-disabled="true" class="bg">
+    <ion-content data-tap-disabled="true" class="bg" ng-init="initialize()">
 
-        <div map-lazy-load="http://maps.google.com/maps/api/js">
-            <map center="41,-87" zoom="3"></map>
-        </div>
-
-        <!--<ui-gmap-google-map ng-if="tab" center='map.center' zoom='map.zoom'>
-            <ui-gmap-marker ng-repeat="mark in markers" idKey='mark.id' coords='mark.location'>
+        <!--<div map-lazy-load="http://maps.google.com/maps/api/js">
+    <map center="41,-87" zoom="3"></map>
+</div>-->
+        <ui-gmap-google-map ng-if="tab" center='map.center' zoom='map.zoom'>
+            <ui-gmap-marker ng-repeat="mark in markers" idKey='mark.id' coords='mark.location' icon='mark.icon'>
             </ui-gmap-marker>
-            <ui-gmap-rectangle bounds="bounds" fill="'#FFFFFF .5'" draggable='true' editable='true' on-bounds_changed="boundsChanged()"></ui-gmap-rectangle>
-            <shape name="rectangle" editable="true" draggable="true" bounds="[[44.490,-78.649],[44.599,-78.443]]" on-bounds_changed="boundsChanged()">
-            </shape>
-        </ui-gmap-google-map>-->
+            <ui-gmap-rectangle bounds="bounds" fill="'#FFFFFF .5'" draggable='true' editable='true' events="events"></ui-gmap-rectangle>
+        </ui-gmap-google-map>
         <div ng-if="!tab">
+            <div id="mapo" data-tap-disabled="true"></div>
             <ul class="list">
                 <li class="item" ng-repeat="vehicle in vehicledata" style="margin:1vh;border: rgba(128, 128, 128, 0.43) 5px double;">
                     <div class="row">
