@@ -96,21 +96,21 @@ angular.module('starter.controllers', [])
                 selected: false,
                 icon: "icon-truck",
                 image: "img/truck_display_pic.png",
-                value: "tourist"
+                value: "tempo"
     },
             {
                 id: 3,
                 selected: false,
                 icon: "icon-auto",
                 image: "img/rickshaw_display_pic.png",
-                value: "transporter"
+                value: "tourist"
     },
             {
                 id: 4,
                 selected: false,
                 icon: "icon-taxi",
                 image: "img/taxi_display_pic.png",
-                value: "transporter"
+                value: "tempo"
     }];
 
         $scope.showimage = $scope.vehicletypes[0].image;
@@ -159,6 +159,9 @@ angular.module('starter.controllers', [])
             template: 'Fetching Vehicles...'
         });
 
+        //VARIABLE INITILIZATION
+        var mapset = 0;
+
         /////////////////////////////MAP/////////////////////////////
         var setmap = function () {
             var lat = $scope.location2.latitude + (($scope.location1.latitude - $scope.location2.latitude) / 2);
@@ -178,11 +181,26 @@ angular.module('starter.controllers', [])
             $scope.bounds = {
                 ne: $scope.location1,
                 sw: $scope.location2
-
+            };
+            $scope.events = {
+                "bounds_changed": function (e) {
+                    $scope.ne = e.getBounds().getNorthEast();
+                    $scope.sw = e.getBounds().getSouthWest();
+                    $scope.location1 = {
+                        latitude: $scope.ne.G,
+                        longitude: $scope.ne.K
+                    };
+                    $scope.location2 = {
+                        latitude: $scope.sw.G,
+                        longitude: $scope.sw.K
+                    };
+                    MyServices.getvehiclesbytype(type, $scope.location1, $scope.location2).success(getvehiclesbytypesuccess);
+                }
             };
         };
         /////MARKERS///////////
         var setmarkers = function () {
+            $scope.markers = [];
             for (var q = 0; q < $scope.vehicledata.length; q++) {
                 $scope.markers.push({
                     "id": (q + 1),
@@ -190,7 +208,7 @@ angular.module('starter.controllers', [])
                         "latitude": $scope.vehicledata[q].latitude,
                         "longitude": $scope.vehicledata[q].longitude
                     },
-                    "icon": "../img/rickshaw_display_pic.png"
+                    "icon": {url: "img/"+type+".ico"}
 
                 });
             };
@@ -200,7 +218,11 @@ angular.module('starter.controllers', [])
             console.log(data);
             $scope.vehicledata = data;
             $ionicLoading.hide();
-            setmap();
+            if (mapset == 0) {
+                setmap();
+                mapset = 1;
+            };
+
             setmarkers();
             setbounds();
 
@@ -261,6 +283,22 @@ angular.module('starter.controllers', [])
             console.log($scope.sw);
         };
 
+        //
+
+
+
+        /* $scope.initialize = function () {
+             var myLatlng = new google.maps.LatLng(43.07493, -89.381388);
+
+             var mapOptions = {
+                 center: myLatlng,
+                 zoom: 16,
+                 mapTypeId: google.maps.MapTypeId.ROADMAP
+             };
+             var mapo = new google.maps.Map(document.getElementById("mapo"));
+         };*/
+
+
 
 
         ////////////////MAP VARIABLES////////////
@@ -310,7 +348,7 @@ angular.module('starter.controllers', [])
         var options = { //options for autocomplete object
             types: ['geocode']
         };
-        autocomplete = new google.maps.places.Autocomplete(input, options);
+        //autocomplete = new google.maps.places.Autocomplete(input, options);
 
         $scope.boundsChanged = function (event) {
             console.log("CHANGED")

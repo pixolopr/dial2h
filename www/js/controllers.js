@@ -96,21 +96,21 @@ angular.module('starter.controllers', [])
                 selected: false,
                 icon: "icon-truck",
                 image: "img/truck_display_pic.png",
-                value: "tourist"
+                value: "tempo"
     },
             {
                 id: 3,
                 selected: false,
                 icon: "icon-auto",
                 image: "img/rickshaw_display_pic.png",
-                value: "transporter"
+                value: "tourist"
     },
             {
                 id: 4,
                 selected: false,
                 icon: "icon-taxi",
                 image: "img/taxi_display_pic.png",
-                value: "transporter"
+                value: "tempo"
     }];
 
         $scope.showimage = $scope.vehicletypes[0].image;
