@@ -130,6 +130,10 @@ color:transparent;
     padding-left: 1%;
     padding-top: 2vh;
 }
+.searchcircles{
+    text-align: center;
+    height: 10vh;
+}
 .line {
       width: 90%;
     /* border-radius: 100%; */
