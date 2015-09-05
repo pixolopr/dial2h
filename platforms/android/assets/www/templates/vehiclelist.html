@@ -1,6 +1,20 @@
 <ion-view view-title="Vehicles">
 
-
+    <div class="row tabdiv">
+        <div class="col col-20"></div>
+        <div class="col col-25">
+            <button ng-click="tab=false" class="button newtab tabdist2 " style="font-size:40px;" ng-class="{tabselected:tab, tabdeselected:!tab}">
+                <img src="img/list.png" style="width: 66%;">
+            </button>
+        </div>
+        <div class="col col-10"></div>
+        <div class="col col-25">
+            <button ng-click="tab=true" class="button newtab tabdist " style="font-size:40px;" ng-class="{tabselected:!tab, tabdeselected:tab}">
+                <img src="img/map.png" style="width: 100%;">
+            </button>
+        </div>
+        <div class="col col-20"></div>
+    </div>
     <ion-content data-tap-disabled="true" class="bg" ng-init="initialize()">
 
         <!--<div map-lazy-load="http://maps.google.com/maps/api/js">
@@ -13,9 +27,36 @@
         </ui-gmap-google-map>
         <div ng-if="!tab">
             <div id="mapo" data-tap-disabled="true"></div>
-            <ul class="list">
-                <li class="item" ng-repeat="vehicle in vehicledata" style="margin:1vh;border: rgba(128, 128, 128, 0.43) 5px double;">
+            <!--<ul class="list">-->
+            <p class="nodatamessage" ng-if="vehicledata.length == 0">No Vehicles were fetched</p>
+            <!--<li class="item"  style="margin:1vh;border: rgba(128, 128, 128, 0.43) 5px double;">-->
+            <div class="card" ng-if="vehicledata.length != 0" ng-repeat="vehicle in vehicledata" ng-click="sendinquiry(vehicle.vehicleid)">
+                <div class="item item-text-wrap">
                     <div class="row">
+                        <div class="col">
+                            <div class="vehicleimagediv">
+
+                                <div class="tononimage" ng-if="vehicle.ton">{{vehicle.ton}} Ton</div>
+                                <div class="tononimage trolleyonimage" ng-if="vehicle.ton">Trolley Length: {{vehicle.trollylength}}</div>
+                                <img src="{{vehicle.vehiclephoto}}" width="90%" class="vehicleimage" />
+
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="vehiclecodediv">A{{vehicle.vendorid}}</div>
+                            {{vehicle.vehiclemake +" "+ vehicle.vehiclemodel}}
+                            <br>
+                            <p style="font-size: smaller;
+">{{"Rahul"}}</p>
+                            <div class="prefroute">
+                                {{"vehicle.preferedroute"}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="row">
                         <div class="col col-25">
                             <img src="{{vehicle.vehiclephoto}}" width="100%" />
                         </div>
@@ -30,20 +71,10 @@
                             <div style="font-size:12px;" ng-if="vehicle.ton">Trolley Length</div>
                             <div ng-if="vehicle.ton">{{vehicle.trollylength}}</div>
                         </div>
-                    </div>
-
-                </li>
+                    </div>-->
+            </li>
             </ul>
         </div>
-        <div class="tabbuttons">
-            <!--ion-ios-list-outline-->
-            <button ng-click="tab=false" class="button newtab tabdist2  gobutton2 " style="font-size:40px;" ng-class="{tabselected:tab, tabdeselected:!tab}">
-                <img src="img/list.png" style="width: 66%;">
-            </button>
-            <button ng-click="tab=true" class="button newtab tabdist  gobutton2 " style="font-size:40px;" ng-class="{tabselected:!tab, tabdeselected:tab}">
-                <img src="img/map.png" style="width: 100%;">
-            </button>
 
-        </div>
     </ion-content>
 </ion-view>

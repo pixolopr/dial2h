@@ -12,8 +12,11 @@
         <div class="searchcircles">
             <div class="line" style="text-align:center;"></div>
             <div class="row">
+
                 <div class="col" ng-repeat="vehicle in vehicletypes" style="text-align:center;">
-                    <div class="taxi  {{vehicle.icon}}" ng-class="{selected:vehicle.selected, deselected:!vehicle.selected}" ng-click="selectvehicle(vehicle.id)"></div>
+                    <div class="taxi" ng-class="{selected:vehicle.selected, deselected:!vehicle.selected}" ng-click="selectvehicle(vehicle.id)">
+                        <img src="img/{{vehicle.icon}}.png" class="selecticon">
+                    </div>
                 </div>
             </div>
         </div>

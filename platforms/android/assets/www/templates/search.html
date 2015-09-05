@@ -9,10 +9,15 @@
         <div style="text-align:center;">
             <img src="{{showimage}}" width="55%">
         </div>
-        <div class="line" style="text-align:center;"></div>
-        <div class="row">
-            <div class="col" ng-repeat="vehicle in vehicletypes" style="text-align:center;">
-                <div class="taxi  {{vehicle.icon}}" ng-class="{selected:vehicle.selected, deselected:!vehicle.selected}" ng-click="selectvehicle(vehicle.id)"></div>
+        <div class="searchcircles">
+            <div class="line" style="text-align:center;"></div>
+            <div class="row">
+
+                <div class="col" ng-repeat="vehicle in vehicletypes" style="text-align:center;">
+                    <div class="taxi" ng-class="{selected:vehicle.selected, deselected:!vehicle.selected}" ng-click="selectvehicle(vehicle.id)">
+                        <img src="img/{{vehicle.icon}}.png" class="selecticon">
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -22,7 +27,7 @@
                 <input class="pac-container" ng-model="placeinput" id="inp" ng-focus="disableTap()" placeholder="Current location" style="text-align: -webkit-center;border: 0px;" googleplace/>
 
             </label>
-            <ion-google-place placeholder="Enter an address, Apt# and ZIP" ng-model="location"  />
+            <ion-google-place placeholder="Enter an address, Apt# and ZIP" ng-model="location" />
 
         </div>
         <div style="padding-left: 43%;">

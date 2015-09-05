@@ -140,7 +140,7 @@ angular.module('starter.controllers', [])
         };
 
     })
-    .controller('vehiclelistCtrl', function ($scope, $stateParams, $location, MyServices, $ionicLoading, $ionicSideMenuDelegate, $ionicPlatform, $cordovaDevice, $http, $cordovaGeolocation) {
+    .controller('vehiclelistCtrl', function ($scope, $stateParams, $location, MyServices, $ionicLoading, $ionicSideMenuDelegate, $ionicPlatform, $cordovaDevice, $http, $cordovaGeolocation, $ionicPopup) {
 
         //////PAGE SETUP///////
         //CAN DRAG CONTENT FOR MENU - TRUE
@@ -208,7 +208,9 @@ angular.module('starter.controllers', [])
                         "latitude": $scope.vehicledata[q].latitude,
                         "longitude": $scope.vehicledata[q].longitude
                     },
-                    "icon": {url: "img/"+type+".ico"}
+                    "icon": {
+                        url: "img/" + type + ".ico"
+                    }
 
                 });
             };
@@ -354,6 +356,47 @@ angular.module('starter.controllers', [])
             console.log("CHANGED")
         };
 
+        /*INQUIRY*/
 
+        //SEND SMS
+        var smssuccess = function (data, status) {
+            console.log(data);
+        };
+
+        $scope.inquirydata = {};
+        $scope.inquirydata.message = "";
+
+        $scope.sendinquiry = function (id) {
+            
+            //FIND NUMBERS
+            for(var i=0; i<$scope.vehicledata.length;i++)
+            {
+                if($scope.vehicledata[i].vehicleid == id)
+                {
+                    var drivernumber = $scope.vehicledata[i].drivercontact;
+                    var vendornumber = $scope.vehicledata[i].vendorcontact;
+                };
+            };
+            
+            var myPopup = $ionicPopup.show({
+                templateUrl: 'templates/inquiryform.html',
+                title: 'Send Inquiry',
+                scope: $scope,
+                buttons: [
+                    {
+                        text: 'Cancel'
+                    },
+                    {
+                        text: '<b>Send</b>',
+                        type: 'button-assertive',
+                        onTap: function (e) {
+                            console.log($scope.inquirydata.message);
+                            MyServices.sendsms(drivernumber, "abhay").success(smssuccess);
+                            MyServices.sendsms(vendornumber, "abhay").success(smssuccess);
+                        }
+      }
+    ]
+            });
+        };
 
     });
