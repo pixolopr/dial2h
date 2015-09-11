@@ -23,16 +23,22 @@
         <ui-gmap-google-map ng-if="tab" center='map.center' zoom='map.zoom'>
             <ui-gmap-marker ng-repeat="mark in markers" idKey='mark.id' coords='mark.location' icon='mark.icon'>
             </ui-gmap-marker>
-            <ui-gmap-rectangle bounds="bounds" fill="'#FFFFFF .5'" draggable='true' editable='true' events="events"></ui-gmap-rectangle>
+            <!--<ui-gmap-rectangle bounds="bounds" fill="'#FFFFFF .5'" draggable='true' editable='true' events="events"></ui-gmap-rectangle>-->
         </ui-gmap-google-map>
         <div ng-if="!tab">
             <div id="mapo" data-tap-disabled="true"></div>
             <!--<ul class="list">-->
             <p class="nodatamessage" ng-if="vehicledata.length == 0">No Vehicles were fetched</p>
             <!--<li class="item"  style="margin:1vh;border: rgba(128, 128, 128, 0.43) 5px double;">-->
-            <div class="card" ng-if="vehicledata.length != 0" ng-repeat="vehicle in vehicledata" ng-click="sendinquiry(vehicle.vehicleid)">
-                <div class="item item-text-wrap">
-                    <div class="row">
+            <ion-list>
+                <!--item -->
+                <ion-item>
+                    Abhay AMin
+                </ion-item>
+                <ion-item class="item-text-wrap listy" ng-repeat="vehicle in vehicledata" ng-if="vehicledata.length != 0" ng-click="">
+                    <!--<div class="card" >-->
+                    <!--<div class="">-->
+                    <div class="row cardy">
                         <div class="col">
                             <div class="vehicleimagediv">
 
@@ -53,8 +59,13 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                    <ion-option-button class="button-positive" ng-click="sendinquiry(vehicle.vehicleid)">
+                        INQUIRE
+                    </ion-option-button>
+                    <!-- </div>-->
+                    <!--</div>-->
+                </ion-item>
+            </ion-list>
 
             <!--<div class="row">
                         <div class="col col-25">

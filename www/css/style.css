@@ -213,6 +213,24 @@
 
 /*LIST*/
 
+.cardy {
+    width: 100%;
+    background-color: white;
+    box-shadow: 5px 5px 5px rgba(175, 172, 172, 0.38);
+}
+.cardyin {
+    width: 50%;
+    display: inline;
+}
+.cardyin2 {
+    width: 50%;
+    //margin-left: 50%;
+}
+.listy .item-content{
+    background-color: #F2EEEE !important;
+    padding: 0px !important;
+}
+
 .prefroute {
     font-size: 0.7em;
     background-color: beige;

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.dial2hire449639" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.pixolo.dial2hire449639" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>dial2hire</name>
   <description>
-        An driver/vehicle hiing App.
+        An driver/vehicle hiring App.
     </description>
   <author email="abhay.pixolo@gmail.com" href="http://pixolo.co.in">
-      Pixolo
+      Pixolo Team
     </author>
   <content src="index.html"/>
   <access origin="*"/>

@@ -76,13 +76,56 @@ angular.module('starter.controllers', [])
             MyServices.signupuser($scope.signupdata).success(signupsuccess);
         };
     })
-    .controller('searchCtrl', function ($scope, $stateParams, $location, $http) {
+    .controller('searchCtrl', function ($scope, $stateParams, $location, $http, $cordovaGeolocation, $ionicLoading) {
 
 
         $scope.input = {};
         $scope.input.placeinput;
 
         $scope.gPlace;
+
+        $ionicLoading.show({
+            template: 'Fetching Location...'
+        });
+
+        var posOptions = {
+            timeout: 10000,
+            enableHighAccuracy: false
+        };
+
+        $scope.loca = {};
+        $scope.currlocation= "Enter YOur Location";
+    
+        $cordovaGeolocation
+            .getCurrentPosition(posOptions)
+            .then(function (position) {
+                var lat = position.coords.latitude;
+                var long = position.coords.longitude;
+
+                var latlng = new google.maps.LatLng(lat, long);
+                geocoder = new google.maps.Geocoder();
+                geocoder.geocode({
+                    'latLng': latlng
+                }, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (results[0]) {
+                            console.log(results[0]);
+                            $scope.currlocation = results[0].formatted_address;
+                            $ionicLoading.hide();
+                        } else {
+                            alert("No results found");
+                            $ionicLoading.hide();
+                        }
+                    } else {
+                        alert("Geocoder failed due to: " + status);
+                        $ionicLoading.hide();
+                    }
+                });
+
+            }, function (err) {
+                alert("Unable to get your location");
+                $ionicLoading.hide();
+            });
 
         $scope.vehicletypes = [{
                 id: 1,
@@ -209,7 +252,7 @@ angular.module('starter.controllers', [])
                         "longitude": $scope.vehicledata[q].longitude
                     },
                     "icon": {
-                        url: "img/" + type + ".ico"
+                        url: "img/" + type + "_icon.ico"
                     }
 
                 });
@@ -367,17 +410,15 @@ angular.module('starter.controllers', [])
         $scope.inquirydata.message = "";
 
         $scope.sendinquiry = function (id) {
-            
+
             //FIND NUMBERS
-            for(var i=0; i<$scope.vehicledata.length;i++)
-            {
-                if($scope.vehicledata[i].vehicleid == id)
-                {
+            for (var i = 0; i < $scope.vehicledata.length; i++) {
+                if ($scope.vehicledata[i].vehicleid == id) {
                     var drivernumber = $scope.vehicledata[i].drivercontact;
                     var vendornumber = $scope.vehicledata[i].vendorcontact;
                 };
             };
-            
+
             var myPopup = $ionicPopup.show({
                 templateUrl: 'templates/inquiryform.html',
                 title: 'Send Inquiry',

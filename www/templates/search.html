@@ -24,7 +24,7 @@
         <div class="list list-inset">
             <label class="item item-input">
                 <i class="icon ion-search placeholder-icon"></i>
-                <input class="pac-container" ng-model="placeinput" id="inp" ng-focus="disableTap()" placeholder="Current location" style="text-align: -webkit-center;border: 0px;" googleplace/>
+                <input class="pac-container" ng-model="placeinput" id="inp" ng-focus="disableTap()" placeholder="{{currlocation}}" style="text-align: -webkit-center;border: 0px;" googleplace/>
 
             </label>
             <ion-google-place placeholder="Enter an address, Apt# and ZIP" ng-model="location" />
