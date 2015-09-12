@@ -90,7 +90,7 @@ angular.module('starter.controllers', [])
 
         var posOptions = {
             timeout: 10000,
-            enableHighAccuracy: false
+            enableHighAccuracy: true
         };
 
         $scope.loca = {};
@@ -272,7 +272,7 @@ angular.module('starter.controllers', [])
             console.log(data);
             $scope.vehicledata = data;
             for (var q = 0; q < $scope.vehicledata.length; q++) {
-                $scope.vehicledata.call = "false";
+                $scope.vehicledata[q].call = false;
             };
             $ionicLoading.hide();
             if (mapset == 0) {
@@ -297,7 +297,7 @@ angular.module('starter.controllers', [])
         if (location == "") {
             var posOptions = {
                 timeout: 10000,
-                enableHighAccuracy: false
+                enableHighAccuracy: true
             };
             $cordovaGeolocation
                 .getCurrentPosition(posOptions)
@@ -481,8 +481,8 @@ angular.module('starter.controllers', [])
                                 timerpopup();
                             };
 
-                            //MyServices.sendsms(drivernumber, message).success(smssuccess);
-                            //MyServices.sendsms(vendornumber, message).success(smssuccess);
+                            MyServices.sendsms(drivernumber, message).success(smssuccess);
+                            MyServices.sendsms(vendornumber, message).success(smssuccess);
 
                             vehicle.call = true;
 
