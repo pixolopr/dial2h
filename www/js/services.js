@@ -21,8 +21,8 @@ var myservices = angular.module('myservices', [])
                 }
             });
         },
-        sendsms: function (number,  name) {
-            return $http.get("http://alerts.solutionsinfini.com/api/web2sms.php?workingkey=15459g72ev3rezt7938tp&username=equalaccts&password=vudUhE$up@7u&to="+number+"&sender=DIALTO&message=You have recieved an inquiry from "+name, {
+        sendsms: function (number,  message) {
+            return $http.get("http://alerts.solutionsinfini.com/api/web2sms.php?workingkey=15459g72ev3rezt7938tp&username=equalaccts&password=vudUhE$up@7u&to="+number+"&sender=DIALTO&message="+message, {
                 params: {}
             });
         },

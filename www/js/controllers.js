@@ -94,8 +94,8 @@ angular.module('starter.controllers', [])
         };
 
         $scope.loca = {};
-        $scope.currlocation= "Enter YOur Location";
-    
+        $scope.currlocation = "Enter YOur Location";
+
         $cordovaGeolocation
             .getCurrentPosition(posOptions)
             .then(function (position) {
@@ -183,7 +183,7 @@ angular.module('starter.controllers', [])
         };
 
     })
-    .controller('vehiclelistCtrl', function ($scope, $stateParams, $location, MyServices, $ionicLoading, $ionicSideMenuDelegate, $ionicPlatform, $cordovaDevice, $http, $cordovaGeolocation, $ionicPopup) {
+    .controller('vehiclelistCtrl', function ($scope, $stateParams, $location, MyServices, $ionicLoading, $ionicSideMenuDelegate, $ionicPlatform, $cordovaDevice, $http, $cordovaGeolocation, $ionicPopup, $ionicListDelegate, $interval) {
 
         //////PAGE SETUP///////
         //CAN DRAG CONTENT FOR MENU - TRUE
@@ -191,6 +191,11 @@ angular.module('starter.controllers', [])
         //TAB TO SHOW VARIABLE
         $scope.tab = false;
         ///////////////////////
+
+        $scope.showDeleteButtons = function () {
+            console.log("hey");
+            $ionicListDelegate.closeOptionButtons();
+        };
 
         //FETCH TYPE OF CAR AND LOCATION DETAILS
         var type = $stateParams.type;
@@ -246,7 +251,7 @@ angular.module('starter.controllers', [])
             $scope.markers = [];
             for (var q = 0; q < $scope.vehicledata.length; q++) {
                 $scope.markers.push({
-                    "id": (q + 1),
+                    "id": $scope.vehicledata[q].vehicleid,
                     "location": {
                         "latitude": $scope.vehicledata[q].latitude,
                         "longitude": $scope.vehicledata[q].longitude
@@ -258,10 +263,17 @@ angular.module('starter.controllers', [])
                 });
             };
         };
+
+        $scope.con = function () {
+            console.log("marker clicked");
+        };
         ////////FUNTION TO GET THE LIST OF VEHICLES/////
         var getvehiclesbytypesuccess = function (data, status) {
             console.log(data);
             $scope.vehicledata = data;
+            for (var q = 0; q < $scope.vehicledata.length; q++) {
+                $scope.vehicledata.call = "false";
+            };
             $ionicLoading.hide();
             if (mapset == 0) {
                 setmap();
@@ -406,18 +418,38 @@ angular.module('starter.controllers', [])
             console.log(data);
         };
 
+        var timerpopup = function () {
+            var tPopup = $ionicPopup.show({
+                templateUrl: 'templates/timer.html',
+                title: "Please wait for driver to  call...",
+                scope: $scope,
+                buttons: []
+            });
+            $interval(function () {
+                tPopup.close();
+            }, 3000, 1);
+        };
+
+
+        //CALL THE VENDOR
+        $scope.callvendor = function(vehicle) {
+            var drivernumber = vehicle.drivercontact;
+            var vendornumber = vehicle.vendorcontact;
+            
+            //CALL THE vendornumber HERE
+        
+        };
+
+    
+        //SEND INQUIRY
         $scope.inquirydata = {};
         $scope.inquirydata.message = "";
 
-        $scope.sendinquiry = function (id) {
+        $scope.sendinquiry = function (vehicle) {
 
             //FIND NUMBERS
-            for (var i = 0; i < $scope.vehicledata.length; i++) {
-                if ($scope.vehicledata[i].vehicleid == id) {
-                    var drivernumber = $scope.vehicledata[i].drivercontact;
-                    var vendornumber = $scope.vehicledata[i].vendorcontact;
-                };
-            };
+            var drivernumber = vehicle.drivercontact;
+            var vendornumber = vehicle.vendorcontact;
 
             var myPopup = $ionicPopup.show({
                 templateUrl: 'templates/inquiryform.html',
@@ -429,11 +461,33 @@ angular.module('starter.controllers', [])
                     },
                     {
                         text: '<b>Send</b>',
-                        type: 'button-assertive',
+                        type: 'button-energized',
                         onTap: function (e) {
-                            console.log($scope.inquirydata.message);
-                            MyServices.sendsms(drivernumber, "abhay").success(smssuccess);
-                            MyServices.sendsms(vendornumber, "abhay").success(smssuccess);
+
+                            if ($scope.inquirydata.from == undefined) {
+                                $scope.inquirydata.from = "Not Mentioned";
+                            };
+                            if ($scope.inquirydata.to == undefined) {
+                                $scope.inquirydata.to = "Not Mentioned";
+                            };
+                            if ($scope.inquirydata.date == undefined) {
+                                $scope.inquirydata.date = "Not Mentioned";
+                            };
+
+                            var message = "You have recived an inquiry from: 'usernameusername' Phone:- 'contactabh'. From:" + $scope.inquirydata.from + " To: " + $scope.inquirydata.to + " on: " + $scope.inquirydata.date;
+
+                            var smssuccess = function (data, status) {
+                                console.log(data);
+                                timerpopup();
+                            };
+
+                            //MyServices.sendsms(drivernumber, message).success(smssuccess);
+                            //MyServices.sendsms(vendornumber, message).success(smssuccess);
+
+                            vehicle.call = true;
+
+                            timerpopup();
+
                         }
       }
     ]
