@@ -29,9 +29,9 @@
             <center>THANK YOU </center>
         </div>
 
-        <div class="list row responsive-sm" style=" left: 2vh; top: 3vh;">
+        <div class="list row responsive-sm">
             <label class="item1 item-input entercode col ">
-                <input type="number" placeholder="ENTER CODE" ng-model="otpdata.otp" style=" text-align:center; font-size: 20px !important; font-weight:800; ">
+                <input type="number" placeholder="ENTER CODE" ng-model="otpdata.otp" class="otpinput">
             </label>
 
         </div>
@@ -46,12 +46,12 @@
             <center ng-if="errormessage == ''">You should get it soon.</center>
         </div>
 
-        <div style="padding-left: 43%;">
+        <div class="searchcircles">
             <button class="button  gobutton2" ng-click="verifyotp()">
                 Go
             </button>
-
         </div>
+        
         <div style="text-align:center; padding-left:3%;">
             <button class="button  resendbutton" style="top:9vh;" ng-click="sendotp()">
                 Resend

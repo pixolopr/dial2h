@@ -37,7 +37,7 @@
 
 .signup {
     text-align: center;
-    font-size: larger !importantn;
+    font-size: larger !important;
 }
 
 .signupbox {
@@ -65,6 +65,18 @@
 
 
 /*otp page*/
+
+.otpinput {
+    text-align: center !important;
+    font-size: 20px !important;
+    font-weight: 800 !important;
+    color: white !important;
+    border-bottom-width: 3px !important;
+    border-bottom-style: solid !important;
+    border-bottom-left-radius: 12px !important;
+    border-bottom-right-radius: 12px !important;
+    width: 100% !important;
+}
 
 .otpbg {
     background-color: #F58220;
@@ -211,6 +223,51 @@
 }
 
 
+/*ACCORDIAN*/
+
+.list .item.item-accordion {
+    position: inherit;
+    margin-top: -123%;
+    line-height: 24px;
+    padding-top: 0;
+    padding-bottom: 0;
+    transition: 0.5s all ease-out;
+    text-align: justify;
+    z-index: 0;
+    margin-top: 0%;
+}
+
+.list .item.item-accordion.ng-hide {
+    /*position: absolute;*/
+    margin-top: -160%;
+}
+
+.list .item.item-accordion.ng-hide-add,
+.list .item.item-accordion.ng-hide-remove {
+    display: block !important;
+}
+
+.list .accor .active {
+    border-color: #556398 !important;
+    background-color: rgba(249, 121, 11, 0.72) !important;
+}
+
+
+/*CUSTOMER CARE*/
+
+.cctext {
+    padding: 10%;
+    font-size: medium;
+    line-height: initial;
+    color: #787272;
+}
+
+.callico {
+    font-size: -webkit-xxx-large;
+    color: white;
+}
+
+
 /*LIST*/
 
 .calltrue {
@@ -308,4 +365,25 @@
     color: rgba(1, 1, 1, 0.41);
     padding: 25%;
     text-align: center;
+}
+
+
+/*menu*/
+
+.menu a {
+    background-color: #0274b9 !important;
+    color: white !important;
+}
+
+.noscroll .scroll {
+    height: auto !important;
+}
+
+.bluebg {
+    background-color: #0274b9 !important;
+    color: white !important;
+}
+
+.bluecolor {
+    color: #0274b9 !important;
 }

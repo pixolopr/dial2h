@@ -41,8 +41,48 @@ angular.module('starter.controllers', [])
     };
 })
 
-.controller('shareCtrl', function ($scope, $stateParams) {})
-    .controller('accountCtrl', function ($scope, $stateParams) {})
+.controller('shareCtrl', function ($scope, $stateParams) {
+
+        $scope.content = [{
+                "name": "About Us",
+                "desc": "Dial2hire is a common call center for car rental companies / Transport companies where vehicle operators willing to get vehicles hired can add vehicles & customers looking for vehicle can directly contact service providers based on route, region and type of vehicle required. Anyone can Hire any vehicle from airport, railway station, hotels or point of attraction in city.We have extensive network of vendors(vehicle operators) across cities for sourcing vehicles almost all residential and commercial locations in Mumbai,Pune,Nasik and Navi Mumbai.No advance payment required for any vehicle booking, customer only needs to select location to travel and confirm vehicle & mobile number or just make a call to our call center 88560 88560 to hire affordable cab,taxi,truck or even Auto rickshaw."
+        },
+            {
+                "name": "CAR Rental Services",
+                "desc": "Dial2hire is known for India's best car rental or cab rental service company. We have many different vehicles registered with us for local or outstation services like Indica, Innova , scorpio, Bolero , Xylo, Swift Dzire, SUV and more Our primary goal to achieve Customer high satisfaction to give fair price and well maintain car. You can book online or call us on 088560 88560 for car rental in Mumbai, car on rent in Pune, car on rent in Delhi, car on rent in Nashik, car on rent in Bangalore, car rental in Chennai or other cities In India and Airport Cab Service in all major cities with cheap price."
+        },
+            {
+                "name": "TRUCK Rental Services",
+                "desc": "Dial2hire.com is a first call center dedicated for transporters & various customers across different industries. It is a place where you can find any types of heavy vehicle because we have huge network of commercial vehicles across the county which helps to fulfill your requirement on time for any types of commercial vehicle or transport services on phone call. We are market leader in transportation service in Mumbai and major location in India. We are one of the top players for Goods Transport Services in Mumbai and all major cities in India. We are expert in these industries and provide one place to full fill your every transportation requirement services, you can call us or visit online for hire truck, Tempo hire, Ashoklayland truck, trailers, LCV, ODC, Containers Handlers, Frozen Cargo, Frozen Food, Full Truck Load, Parcel Service, crane-forklift, Part Load, Canteen Dept, Heavy & Over Dimension, CFA Transportation, Exhibition activities, Food Carrier, FTL, Household Goods, Packing & Moving, Custom House Agent, Containers, Fright Liner, Tarpaulin Dealers, Steel consignments, Over Dimension Materials, Warehousing, Packers & Movers, Project & Handling, Prompt Service, Sensitive Item, Transport Clearing Forwarding, Truck Load, Toras transport vehicles, Vehicle Transportation and tempo of various sizes with many futures like closed or open type truck hire or tempo hire which is required in various industrial zones. Now you can Book any Truck on rent, tempo traveler service, Eicher 1190 truck hire, Tata lpt 16 ft truck, Eicher 14 ft or 17 ft truck on hire, Tata 407 for local or outstation hiring is available on phone call."
+        },
+            {
+                "name": "TAXI Rental Services",
+                "desc": "We are also in taxi rental services, you can book online or booking available on call for Black yellow taxi and cool cab taxi stand - we have vast network within city and available phone connectivity to all regional taxi stand to ensure the vehicle sourcing done for customers in nearby locality. Now you can book your taxi at home by call or online with Dial2hire.com"
+        }, {
+                "name": "AUTO Rental Services",
+                "desc": "Auto rickshaw hire is a new service we have recently started where operators can add his auto for hiring and person willing to hire auto for full day or other meetings in city can be handled. With direct contacts of auto owner are shared."
+        }];
+
+        $scope.toggleGroup = function (group) {
+            if ($scope.isGroupShown(group)) {
+                $scope.shownGroup = null;
+            } else {
+                $scope.shownGroup = group;
+            }
+        };
+        $scope.isGroupShown = function (group) {
+            return $scope.shownGroup === group;
+        };
+
+
+    })
+    .controller('accountCtrl', function ($scope, $stateParams) {
+    
+    $scope.callcc = function()
+    {
+        window.open('tel:88560 88560', '_system');
+    };
+})
 
 .controller('loginCtrl', function ($scope, $stateParams, $location) {
 
@@ -54,7 +94,7 @@ angular.module('starter.controllers', [])
             $location.path("/app/signup");
         };
     })
-    .controller('otpCtrl', function ($scope, $stateParams, $location, MyServices) {
+    .controller('otpCtrl', function ($scope, $stateParams, $location, MyServices, $ionicLoading) {
 
 
         $scope.otpdata = {};
@@ -71,24 +111,36 @@ angular.module('starter.controllers', [])
 
         $scope.sendotp = function () {
             otp = Math.floor((Math.random() * 999999) + 100000);
-            var message = "Dear customer, please use this OPT to login to the Dial2Hire app : " + otp;
+            var message = "Dear customer, please use this OTP to login to the Dial2Hire app : " + otp;
             MyServices.sendsms(user.contact, message).success(smssuccess);
         };
 
         $scope.sendotp();
 
+        var signupsuccess = function (data, status) {
+            $ionicLoading.hide();
+            $.jStorage.set("user", data);
+            $location.path("/app/home");
+        };
+
+        var signuperror = function (data, status) {
+            $scope.errormessage = "Theres seems to be an error in the server";
+        };
 
         $scope.verifyotp = function () {
             if ($scope.otpdata.otp == otp) {
-                $.jStorage.set("user", user);
-                $location.path("/app/home");
+                $ionicLoading.show({
+                    template: 'Signing in...'
+                });
+                MyServices.signupuser(user).success(signupsuccess).error(signuperror);
+
             } else {
                 $scope.errormessage = "The OTP is invalid";
             };
 
         };
     })
-    .controller('signupCtrl', function ($scope, $stateParams, $location, MyServices) {
+    .controller('signupCtrl', function ($scope, $stateParams, $location, MyServices, $ionicLoading) {
 
         $scope.signupdata = {};
         $scope.signupdata.fullname = "";
@@ -96,7 +148,8 @@ angular.module('starter.controllers', [])
 
         $scope.errormessage = "";
 
-        var signupsuccess = function (data, status) {
+        /*var signupsuccess = function (data, status) {
+            $ionicLoading.hide();
             if (data == "false") {
                 $scope.errormessage = "Number already registered";
             } else {
@@ -104,11 +157,17 @@ angular.module('starter.controllers', [])
                 $location.path("/app/otp");
                 console.log(data);
             };
-        };
+        };*/
+
+        /*var signuperror = function (data, status) {
+            $scope.errormessage = "There was some error signing in, please try again";
+        };*/
 
         $scope.signup = function () {
             if ($scope.signupdata.fullname != '' && $scope.signupdata.contact != "") {
-                MyServices.signupuser($scope.signupdata).success(signupsuccess);
+                $.jStorage.set("user", $scope.signupdata);
+                $location.path("/app/otp");
+                //MyServices.signupuser($scope.signupdata).success(signupsuccess).error(signuperror);
             } else {
                 $scope.errormessage = "Please enter both fields";
             };
@@ -184,14 +243,14 @@ angular.module('starter.controllers', [])
                 selected: false,
                 icon: "icon-auto",
                 image: "img/rickshaw_display_pic.png",
-                value: "tourist"
+                value: "rickshaw"
     },
             {
                 id: 4,
                 selected: false,
                 icon: "icon-taxi",
                 image: "img/taxi_display_pic.png",
-                value: "tempo"
+                value: "taxi"
     }];
 
         $scope.showimage = $scope.vehicletypes[0].image;
@@ -240,6 +299,7 @@ angular.module('starter.controllers', [])
 
         //FETCH TYPE OF CAR AND LOCATION DETAILS
         var type = $stateParams.type;
+        $scope.imagepath = "http://dial2hire.com/images/" + type + "_images/";
         var location = $stateParams.location;
         console.log(location);
 
@@ -488,7 +548,7 @@ angular.module('starter.controllers', [])
                 scope: $scope,
                 buttons: [
                     {
-                        text: cancel
+                        text: "cancel"
                     },
                     {
                         text: '<b>Login</b>',
@@ -504,12 +564,14 @@ angular.module('starter.controllers', [])
 
         $scope.sendinquiry = function (vehicle) {
 
+            var user = $.jStorage.get("user");
+
             //FIND NUMBERS
             var drivernumber = vehicle.drivercontact;
             var vendornumber = vehicle.vendorcontact;
 
             if ($.jStorage.get("user")) {
-                if ($.jStorage.get("user") != {}) {
+                if ($.jStorage.get("user").contact) {
 
 
                     if (vehicle.call == false) {
@@ -534,7 +596,7 @@ angular.module('starter.controllers', [])
                                         };
                                         $scope.inquirydata.date = $filter('date')($scope.inquirydata.date, "dd-MM-yyyy");
 
-                                        var message = "You have recived an inquiry from: 'usernameusername' Phone:- 'contactabh'. From:" + $scope.inquirydata.from + " To: " + $scope.inquirydata.to + " on: " + $scope.inquirydata.date;
+                                        var message = "You have recived an inquiry from: " + user.name + " Phone:- " + user.contact + ". From:" + $scope.inquirydata.from + " To: " + $scope.inquirydata.to + " on: " + $scope.inquirydata.date;
 
                                         var smssuccess = function (data, status) {
                                             console.log(data);

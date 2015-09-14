@@ -29,14 +29,14 @@
                 <input type="text" placeholder="Whats your Name?" ng-model="signupdata.fullname" class="signup">
             </label>
             <label class="item1 item-input border">
-                <input type="number" placeholder="Mobile number" ng-model="signupdata.contact" class="signup">
+                <input type="tel" placeholder="Mobile number" ng-model="signupdata.contact" class="signup">
             </label>
         </div>
         <div style="text-align:center; color:red;"> 
             <p>{{errormessage}}</p>
         </div>
 
-        <div style="padding-left: 43%;">
+        <div class="searchcircles">
 
             <button ng-click="signup()" class="button  gobutton" style="box-shadow: black 2px 2px 3px; font-size: x-large; padding: 6px;">
                 Go

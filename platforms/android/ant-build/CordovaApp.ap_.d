@@ -82,6 +82,7 @@ C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\bg.png \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\bg2.png \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\btnbg.png \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\car_display_pic.png \
+C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\cc_slider.png \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\icon-auto.png \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\icon-car.png \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\icon-taxi.png \
