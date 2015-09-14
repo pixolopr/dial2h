@@ -54,26 +54,64 @@ angular.module('starter.controllers', [])
             $location.path("/app/signup");
         };
     })
-    .controller('otpCtrl', function ($scope, $stateParams, $location) {
+    .controller('otpCtrl', function ($scope, $stateParams, $location, MyServices) {
+
+
+        $scope.otpdata = {};
+        $scope.otpdata.otp = "";
+        $scope.errormessage = "";
+        var otp = "";
+
+        var user = $.jStorage.get("user");
+        $.jStorage.set("user", {});
+
+        var smssuccess = function () {
+            console.log(data);
+        };
+
+        $scope.sendotp = function () {
+            otp = Math.floor((Math.random() * 999999) + 100000);
+            var message = "Dear customer, please use this OPT to login to the Dial2Hire app : " + otp;
+            MyServices.sendsms(user.contact, message).success(smssuccess);
+        };
+
+        $scope.sendotp();
+
+
         $scope.verifyotp = function () {
-            $location.path("/app/home");
+            if ($scope.otpdata.otp == otp) {
+                $.jStorage.set("user", user);
+                $location.path("/app/home");
+            } else {
+                $scope.errormessage = "The OTP is invalid";
+            };
+
         };
     })
     .controller('signupCtrl', function ($scope, $stateParams, $location, MyServices) {
 
         $scope.signupdata = {};
+        $scope.signupdata.fullname = "";
+        $scope.signupdata.contact = "";
+
+        $scope.errormessage = "";
 
         var signupsuccess = function (data, status) {
             if (data == "false") {
-                alert("Number already registered");
+                $scope.errormessage = "Number already registered";
             } else {
+                $.jStorage.set("user", data);
                 $location.path("/app/otp");
                 console.log(data);
             };
         };
 
         $scope.signup = function () {
-            MyServices.signupuser($scope.signupdata).success(signupsuccess);
+            if ($scope.signupdata.fullname != '' && $scope.signupdata.contact != "") {
+                MyServices.signupuser($scope.signupdata).success(signupsuccess);
+            } else {
+                $scope.errormessage = "Please enter both fields";
+            };
         };
     })
     .controller('searchCtrl', function ($scope, $stateParams, $location, $http, $cordovaGeolocation, $ionicLoading) {
@@ -94,7 +132,7 @@ angular.module('starter.controllers', [])
         };
 
         $scope.loca = {};
-        $scope.currlocation = "Enter YOur Location";
+        $scope.currlocation = "Enter Your Location";
 
         $cordovaGeolocation
             .getCurrentPosition(posOptions)
@@ -183,18 +221,21 @@ angular.module('starter.controllers', [])
         };
 
     })
-    .controller('vehiclelistCtrl', function ($scope, $stateParams, $location, MyServices, $ionicLoading, $ionicSideMenuDelegate, $ionicPlatform, $cordovaDevice, $http, $cordovaGeolocation, $ionicPopup, $ionicListDelegate, $interval) {
+    .controller('vehiclelistCtrl', function ($scope, $stateParams, $location, MyServices, $ionicLoading, $ionicSideMenuDelegate, $ionicPlatform, $cordovaDevice, $http, $cordovaGeolocation, $ionicPopup, $ionicListDelegate, $interval, $filter) {
 
         //////PAGE SETUP///////
         //CAN DRAG CONTENT FOR MENU - TRUE
         $ionicSideMenuDelegate.canDragContent(true);
         //TAB TO SHOW VARIABLE
-        $scope.tab = false;
+        $scope.tab = true;
         ///////////////////////
+        $ionicListDelegate.canSwipeItems(false);
+        console.log($ionicListDelegate.canSwipeItems());
 
-        $scope.showDeleteButtons = function () {
-            console.log("hey");
-            $ionicListDelegate.closeOptionButtons();
+
+        //CHANGE TAB
+        $scope.changetab = function () {
+            $scope.tab = !$scope.tab;
         };
 
         //FETCH TYPE OF CAR AND LOCATION DETAILS
@@ -246,8 +287,12 @@ angular.module('starter.controllers', [])
                 }
             };
         };
+
+        $scope.icon = {
+            url: "img/" + type + "_icon.ico"
+        };
         /////MARKERS///////////
-        var setmarkers = function () {
+        /*var setmarkers = function () {
             $scope.markers = [];
             for (var q = 0; q < $scope.vehicledata.length; q++) {
                 $scope.markers.push({
@@ -262,7 +307,7 @@ angular.module('starter.controllers', [])
 
                 });
             };
-        };
+        };*/
 
         $scope.con = function () {
             console.log("marker clicked");
@@ -273,6 +318,9 @@ angular.module('starter.controllers', [])
             $scope.vehicledata = data;
             for (var q = 0; q < $scope.vehicledata.length; q++) {
                 $scope.vehicledata[q].call = false;
+                $scope.vehicledata[q].icon = {
+                    url: "img/" + type + "_icon.ico"
+                };
             };
             $ionicLoading.hide();
             if (mapset == 0) {
@@ -280,7 +328,7 @@ angular.module('starter.controllers', [])
                 mapset = 1;
             };
 
-            setmarkers();
+            //setmarkers();
             setbounds();
 
         };
@@ -340,20 +388,6 @@ angular.module('starter.controllers', [])
             console.log($scope.sw);
         };
 
-        //
-
-
-
-        /* $scope.initialize = function () {
-             var myLatlng = new google.maps.LatLng(43.07493, -89.381388);
-
-             var mapOptions = {
-                 center: myLatlng,
-                 zoom: 16,
-                 mapTypeId: google.maps.MapTypeId.ROADMAP
-             };
-             var mapo = new google.maps.Map(document.getElementById("mapo"));
-         };*/
 
 
 
@@ -427,23 +461,46 @@ angular.module('starter.controllers', [])
             });
             $interval(function () {
                 tPopup.close();
-            }, 3000, 1);
+            }, 3000);
         };
 
 
         //CALL THE VENDOR
-        $scope.callvendor = function(vehicle) {
+        $scope.callvendor = function (vehicle) {
             var drivernumber = vehicle.drivercontact;
             var vendornumber = vehicle.vendorcontact;
-            
+
             //CALL THE vendornumber HERE
-        
+
         };
 
-    
+
         //SEND INQUIRY
         $scope.inquirydata = {};
-        $scope.inquirydata.message = "";
+
+        $scope.inquirydata.date = new Date();
+
+        var gotologin = function () {
+            var loginpopup = $ionicPopup.show({
+                template: '',
+                title: 'You need to Login',
+                subTitle: 'in order to send an Inquiry',
+                scope: $scope,
+                buttons: [
+                    {
+                        text: cancel
+                    },
+                    {
+                        text: '<b>Login</b>',
+                        type: 'button-energized',
+                        onTap: function (e) {
+                            $location.path("/app/signup");
+                        }
+      }
+
+    ]
+            });
+        };
 
         $scope.sendinquiry = function (vehicle) {
 
@@ -451,47 +508,73 @@ angular.module('starter.controllers', [])
             var drivernumber = vehicle.drivercontact;
             var vendornumber = vehicle.vendorcontact;
 
-            var myPopup = $ionicPopup.show({
-                templateUrl: 'templates/inquiryform.html',
-                title: 'Send Inquiry',
-                scope: $scope,
-                buttons: [
-                    {
-                        text: 'Cancel'
+            if ($.jStorage.get("user")) {
+                if ($.jStorage.get("user") != {}) {
+
+
+                    if (vehicle.call == false) {
+                        var myPopup = $ionicPopup.show({
+                            templateUrl: 'templates/inquiryform.html',
+                            title: 'Send Inquiry',
+                            scope: $scope,
+                            buttons: [
+                                {
+                                    text: 'Cancel'
                     },
-                    {
-                        text: '<b>Send</b>',
-                        type: 'button-energized',
-                        onTap: function (e) {
+                                {
+                                    text: '<b>Send</b>',
+                                    type: 'button-energized',
+                                    onTap: function (e) {
 
-                            if ($scope.inquirydata.from == undefined) {
-                                $scope.inquirydata.from = "Not Mentioned";
-                            };
-                            if ($scope.inquirydata.to == undefined) {
-                                $scope.inquirydata.to = "Not Mentioned";
-                            };
-                            if ($scope.inquirydata.date == undefined) {
-                                $scope.inquirydata.date = "Not Mentioned";
-                            };
+                                        if ($scope.inquirydata.from == undefined) {
+                                            $scope.inquirydata.from = "Not Mentioned";
+                                        };
+                                        if ($scope.inquirydata.to == undefined) {
+                                            $scope.inquirydata.to = "Not Mentioned";
+                                        };
+                                        $scope.inquirydata.date = $filter('date')($scope.inquirydata.date, "dd-MM-yyyy");
 
-                            var message = "You have recived an inquiry from: 'usernameusername' Phone:- 'contactabh'. From:" + $scope.inquirydata.from + " To: " + $scope.inquirydata.to + " on: " + $scope.inquirydata.date;
+                                        var message = "You have recived an inquiry from: 'usernameusername' Phone:- 'contactabh'. From:" + $scope.inquirydata.from + " To: " + $scope.inquirydata.to + " on: " + $scope.inquirydata.date;
 
-                            var smssuccess = function (data, status) {
-                                console.log(data);
-                                timerpopup();
-                            };
+                                        var smssuccess = function (data, status) {
+                                            console.log(data);
+                                            timerpopup();
+                                        };
 
-                            MyServices.sendsms(drivernumber, message).success(smssuccess);
-                            MyServices.sendsms(vendornumber, message).success(smssuccess);
+                                        MyServices.sendsms(drivernumber, message).success(smssuccess);
+                                        MyServices.sendsms(vendornumber, message).success(smssuccess);
 
-                            vehicle.call = true;
+                                        vehicle.call = true;
+                                        vehicle.icon = {
+                                            url: "img/" + type + "_icon_call.ico"
+                                        };
 
-                            timerpopup();
+                                        $scope.inquirydata = {};
 
-                        }
+                                        // timerpopup();
+
+                                    }
       }
     ]
-            });
+                        });
+                    } else {
+
+                        //CALL
+                        window.open('tel:' + vendornumber, '_system');
+
+                    };
+
+                } else {
+                    gotologin();
+                };
+            } else {
+                gotologin();
+            };
+
+
+
+
+
         };
 
     });
