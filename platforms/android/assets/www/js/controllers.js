@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicNavBarDelegate) {
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $ionicNavBarDelegate, $location) {
 
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
@@ -39,6 +39,33 @@ angular.module('starter.controllers', [])
             $scope.closeLogin();
         }, 1000);
     };
+
+    $scope.test = function () {
+        console.log("init");
+        console.log($.jStorage.get("user").name);
+    };
+
+    $scope.$on('$ionicView.enter', function () {
+        $scope.userexist = false;
+
+
+
+        if ($.jStorage.get("user").name) {
+            if ($.jStorage.get("user").name != '') {
+                $scope.userexist = true;
+            };
+        };
+    });
+
+    //Log out function
+    $scope.logout = function () {
+        $.jStorage.set("user", {});
+        $scope.userexist = false;
+        $location.path("/app/search");
+
+    };
+
+
 })
 
 .controller('shareCtrl', function ($scope, $stateParams) {

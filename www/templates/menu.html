@@ -18,11 +18,21 @@
         </ion-header-bar>
         <ion-content class="bluebg">
             <ion-list class="menu bluebg">
-               <ion-item menu-close href="#/app/signup">
-                <div class="row"  class="bluebg">
+               <ion-item menu-close href="#/app/signup" ng-if="!userexist">
+                <div class="row"  class="bluebg" >
                         <div class="col col-25"><i class="icon ion-log-in"></i>
                         </div>
-                        <div class="col col-75">Login</div>
+                        <div class="col col-75" >Login</div>
+                       <!-- {{console.log(jStorage.get("user"))}}-->
+                    </div>
+
+                </ion-item>
+                <ion-item menu-close  ng-if="userexist" ng-click="logout()" href="">
+                <div class="row"  class="bluebg" >
+                        <div class="col col-25"><i class="icon ion-log-in"></i>
+                        </div>
+                        <div class="col col-75" >Logout</div>
+                       <!-- {{console.log(jStorage.get("user"))}}-->
                     </div>
 
                 </ion-item>
