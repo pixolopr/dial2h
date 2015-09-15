@@ -102,7 +102,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'myservices', 'uiGmap
         $ionicConfigProvider.tabs.position('bottom');
         $ionicConfigProvider.navBar.alignTitle('center');
     })
-    .directive('googleplace', function () {
+    /*.directive('googleplace', function () {
         return {
             require: 'ngModel',
             link: function (scope, element, attrs, model) {
@@ -121,7 +121,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'myservices', 'uiGmap
                 });
             }
         };
-    })
+    })*/
     .directive('reverseGeocode', function () {
         return {
             restrict: 'E',

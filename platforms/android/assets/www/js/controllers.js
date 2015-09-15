@@ -77,12 +77,11 @@ angular.module('starter.controllers', [])
 
     })
     .controller('accountCtrl', function ($scope, $stateParams) {
-    
-    $scope.callcc = function()
-    {
-        window.open('tel:88560 88560', '_system');
-    };
-})
+
+        $scope.callcc = function () {
+            window.open('tel:88560 88560', '_system');
+        };
+    })
 
 .controller('loginCtrl', function ($scope, $stateParams, $location) {
 
@@ -588,6 +587,10 @@ angular.module('starter.controllers', [])
                                     type: 'button-energized',
                                     onTap: function (e) {
 
+                                        $ionicLoading.show({
+                                            template: 'Sending...'
+                                        });
+
                                         if ($scope.inquirydata.from == undefined) {
                                             $scope.inquirydata.from = "Not Mentioned";
                                         };
@@ -598,13 +601,31 @@ angular.module('starter.controllers', [])
 
                                         var message = "You have recived an inquiry from: " + user.name + " Phone:- " + user.contact + ". From:" + $scope.inquirydata.from + " To: " + $scope.inquirydata.to + " on: " + $scope.inquirydata.date;
 
+                                        var fromloc = $scope.inquirydata.from;
+                                        var toloc = $scope.inquirydata.to;
+
                                         var smssuccess = function (data, status) {
+                                            $ionicLoading.hide();
                                             console.log(data);
                                             timerpopup();
                                         };
 
-                                        MyServices.sendsms(drivernumber, message).success(smssuccess);
-                                        MyServices.sendsms(vendornumber, message).success(smssuccess);
+                                        var inquirysuccess = function (data, status) {
+                                            if (data == "true") {
+                                                MyServices.sendsms(drivernumber, message).success(smssuccess);
+                                                MyServices.sendsms(vendornumber, message).success(smssuccess);
+                                            } else {
+                                                $ionicLoading.hide();
+                                                alert("There is some error is the server")
+                                            };
+                                        };
+
+                                        var ipsuccess = function (data, status) {
+                                            console.log(fromloc);
+                                            MyServices.sendinquiry(vehicle.vehicleid, data.ip, fromloc, toloc).success(inquirysuccess);
+                                        };
+                                        MyServices.getip().success(ipsuccess);
+
 
                                         vehicle.call = true;
                                         vehicle.icon = {

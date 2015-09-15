@@ -21,9 +21,31 @@ var myservices = angular.module('myservices', [])
                 }
             });
         },
-        sendsms: function (number,  message) {
-            return $http.get("http://alerts.solutionsinfini.com/api/web2sms.php?workingkey=15459g72ev3rezt7938tp&username=equalaccts&password=vudUhE$up@7u&to="+number+"&sender=DIALTO&message="+message, {
+        sendsms: function (number, message) {
+            return $http.get("http://alerts.solutionsinfini.com/api/web2sms.php?workingkey=15459g72ev3rezt7938tp&username=equalaccts&password=vudUhE$up@7u&to=" + number + "&sender=DIALTO&message=" + message, {
                 params: {}
+            });
+        },
+        getip: function () {
+            return $http.get("http://ipv4.myexternalip.com/json", {
+                params: {}
+            });
+
+        },
+        sendinquiry: function (id, ip, from, to) {
+            console.log(from);
+            var user = $.jStorage.get("user");
+
+            return $http.get(adminurl + "inquiry/inquiry", {
+                params: {
+                    data: {
+                        vehicleid: id,
+                        userid: user.id,
+                        ip: ip,
+                        fromloc: from,
+                        toloc: to
+                    }
+                }
             });
         },
     }
