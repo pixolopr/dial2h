@@ -202,6 +202,15 @@ angular.module('starter.controllers', [])
     .controller('searchCtrl', function ($scope, $stateParams, $location, $http, $cordovaGeolocation, $ionicLoading) {
 
 
+
+
+        // onError Callback receives a PositionError object
+        //
+
+
+
+
+
         $scope.input = {};
         $scope.input.placeinput;
 
@@ -211,44 +220,58 @@ angular.module('starter.controllers', [])
             template: 'Fetching Location...'
         });
 
-        var posOptions = {
-            timeout: 10000,
-            enableHighAccuracy: true
-        };
+
 
         $scope.loca = {};
         $scope.currlocation = "Enter Your Location";
 
-        $cordovaGeolocation
-            .getCurrentPosition(posOptions)
-            .then(function (position) {
-                var lat = position.coords.latitude;
-                var long = position.coords.longitude;
+        var locsuccess = function (position) {
+            var lat = position.coords.latitude;
+            var long = position.coords.longitude;
 
-                var latlng = new google.maps.LatLng(lat, long);
-                geocoder = new google.maps.Geocoder();
-                geocoder.geocode({
-                    'latLng': latlng
-                }, function (results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        if (results[0]) {
-                            console.log(results[0]);
-                            $scope.currlocation = results[0].formatted_address;
-                            $ionicLoading.hide();
-                        } else {
-                            alert("No results found");
-                            $ionicLoading.hide();
-                        }
+            var latlng = new google.maps.LatLng(lat, long);
+            geocoder = new google.maps.Geocoder();
+            geocoder.geocode({
+                'latLng': latlng
+            }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[0]) {
+                        console.log(results[0]);
+                        $scope.currlocation = results[0].formatted_address;
+                        $ionicLoading.hide();
                     } else {
-                        alert("Geocoder failed due to: " + status);
+                        alert("No results found");
                         $ionicLoading.hide();
                     }
-                });
-
-            }, function (err) {
-                alert("Unable to get your location");
-                $ionicLoading.hide();
+                } else {
+                    alert("Geocoder failed due to: " + status);
+                    $ionicLoading.hide();
+                }
             });
+        };
+
+        function onError(error) {
+            alert('code: ' + error.code + '\n' +
+                'message: ' + error.message + '\n');
+        };
+
+        navigator.geolocation.getCurrentPosition(locsuccess, onError);
+
+        /* 
+        var posOptions = {
+             timeout: 10000,
+             enableHighAccuracy: true
+         };
+         $cordovaGeolocation
+             .getCurrentPosition(posOptions)
+             .then(function (position) {
+
+
+             }, function (err) {
+                 alert("Unable to get your location");
+                 $ionicLoading.hide();
+             });
+             */
 
         $scope.vehicletypes = [{
                 id: 1,
