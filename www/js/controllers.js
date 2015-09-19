@@ -437,9 +437,14 @@ angular.module('starter.controllers', [])
             setbounds();
 
         };
+        var getvehiclesbytypeerror = function (data, status) {
+            $scope.vehicledata = [];
+            $ionicLoading.hide();
+        };
+    
         var getlist = function () {
             console.log($scope.location1, $scope.location2);
-            MyServices.getvehiclesbytype(type, $scope.location1, $scope.location2).success(getvehiclesbytypesuccess);
+            MyServices.getvehiclesbytype(type, $scope.location1, $scope.location2).success(getvehiclesbytypesuccess).error(getvehiclesbytypeerror);
         };
         ///////////////////////////
 
