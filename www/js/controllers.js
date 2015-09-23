@@ -223,9 +223,9 @@ angular.module('starter.controllers', [])
 
         $scope.gPlace;
 
-        /*$ionicLoading.show({
+        $ionicLoading.show({
             template: 'Fetching Location...'
-        });*/
+        });
 
 
 
@@ -262,7 +262,7 @@ angular.module('starter.controllers', [])
                 'message: ' + error.message + '\n');
         };
 
-        //navigator.geolocation.getCurrentPosition(locsuccess, onError);
+        navigator.geolocation.getCurrentPosition(locsuccess, onError);
 
         /* 
         var posOptions = {
