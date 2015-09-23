@@ -1,5 +1,6 @@
 <ion-view view-title="Vehicles">
 
+
     <!--<div class="row tabdiv">
         <div class="col col-20"></div>
         <div class="col col-25">
@@ -16,7 +17,20 @@
         <div class="col col-20"></div>
     </div>-->
     <ion-content class="bg" style="margin-bottom: 20px;">
+        <div class="filterdiv">
+            <label class="item item-input item-select" style="width:90%">
+                <div class="input-label" style="    display: flex !important;">
+                    Filter By Vehicle
+                </div>
+                <select ng-model="vehiclefilter" ng-change="filtercars(vehiclefilter);">
+                    <option value="all" selected>All Vehicles</option>
+                    <option ng-repeat="filter in filterlist" value="{{filterlist[$index]}}">{{filterlist[$index]}}</option>
+                </select>
+            </label>
+            <!--<select class="filterfield" >
 
+            </select>-->
+        </div>
         <!--<div map-lazy-load="http://maps.google.com/maps/api/js">
     <map center="41,-87" zoom="3"></map>
 </div>-->

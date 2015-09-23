@@ -132,10 +132,17 @@ angular.module('starter.controllers', [])
         $.jStorage.set("user", {});
 
         var smssuccess = function () {
+
             console.log(data);
         };
 
+        var otpsent = 0;
+
         $scope.sendotp = function () {
+            if (otpsent > 0) {
+                $scope.resendtext = "OTP has been re-sent to you";
+            };
+            otpsent = 1;
             otp = Math.floor((Math.random() * 999999) + 100000);
             var message = "Dear customer, please use this OTP to login to the Dial2Hire app : " + otp;
             MyServices.sendsms(user.contact, message).success(smssuccess);
@@ -416,17 +423,58 @@ angular.module('starter.controllers', [])
                 });
             };
         };*/
+        /////FILTER////////
+        $scope.vehiclefilter = "all";
+        $scope.filterlist = [];
+
+        $scope.filtercars = function (make) {
+            $scope.vehicledata = [];
+            if (make == "all") {
+                $scope.vehicledata = $scope.allvehicles;
+            } else {
+                for (var f = 0; f < $scope.allvehicles.length; f++) {
+                    if ($scope.allvehicles[f].vehiclemake == make) {
+                        $scope.vehicledata.push($scope.allvehicles[f]);
+                    };
+                };
+            };
+        };
 
         ////////FUNTION TO GET THE LIST OF VEHICLES/////
         var getvehiclesbytypesuccess = function (data, status) {
-            console.log(data);
+            
+            
+            
+            
+            //creating filter list
+            for (var m = 0; m < data.length; m++) {
+                var make = data[m].vehiclemake;
+                if ($scope.filterlist.indexOf(make) == -1) {
+                    $scope.filterlist.push(make);
+                };
+            };
+            console.log($scope.filterlist);
+            
+            //storing data in variables
+            $scope.allvehicles = data;
             $scope.vehicledata = data;
+            
             for (var q = 0; q < $scope.vehicledata.length; q++) {
                 $scope.vehicledata[q].call = false;
                 $scope.vehicledata[q].icon = {
                     url: "img/" + type + "_icon.ico"
                 };
             };
+            
+            
+            //adding call and icon
+            for (var q = 0; q < $scope.vehicledata.length; q++) {
+                $scope.vehicledata[q].call = false;
+                $scope.vehicledata[q].icon = {
+                    url: "img/" + type + "_icon.ico"
+                };
+            };
+            
             $ionicLoading.hide();
             if (mapset == 0) {
                 setmap();
@@ -441,7 +489,7 @@ angular.module('starter.controllers', [])
             $scope.vehicledata = [];
             $ionicLoading.hide();
         };
-    
+
         var getlist = function () {
             console.log($scope.location1, $scope.location2);
             MyServices.getvehiclesbytype(type, $scope.location1, $scope.location2).success(getvehiclesbytypesuccess).error(getvehiclesbytypeerror);
@@ -657,7 +705,6 @@ angular.module('starter.controllers', [])
 
                                         var smssuccess = function (data, status) {
                                             $ionicLoading.hide();
-                                            console.log(data);
                                             timerpopup();
                                         };
 
@@ -665,6 +712,7 @@ angular.module('starter.controllers', [])
                                             if (data == "true") {
                                                 MyServices.sendsms(drivernumber, message).success(smssuccess);
                                                 MyServices.sendsms(vendornumber, message).success(smssuccess);
+                                                //smssuccess();
                                             } else {
                                                 $ionicLoading.hide();
                                                 alert("There is some error is the server")
@@ -674,6 +722,7 @@ angular.module('starter.controllers', [])
                                         var ipsuccess = function (data, status) {
                                             console.log(fromloc);
                                             MyServices.sendinquiry(vehicle.vehicleid, data.ip, fromloc, toloc).success(inquirysuccess);
+                                            
                                         };
                                         MyServices.getip().success(ipsuccess);
 

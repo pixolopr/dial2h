@@ -387,3 +387,15 @@
 .bluecolor {
     color: #0274b9 !important;
 }
+
+.filterfield {
+    width: 90%;
+    margin-top: 1vh;
+    height: 5vh;
+}
+
+.filterdiv {
+    text-align: -webkit-center;
+    height: 9vh;
+    background-color: #F9790B;
+}
