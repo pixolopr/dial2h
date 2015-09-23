@@ -17,9 +17,9 @@
         <preference name="SplashScreen" value="screen" />
         <preference name="SplashScreenDelay" value="3000" />
         <preference name="Orientation" value="portrait" />
-        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-        <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+        <uses-permission name="android.permission.ACCESS_COARSE_LOCATION" />
+        <uses-permission name="android.permission.ACCESS_FINE_LOCATION" />
+        <uses-permission name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
         <feature name="StatusBar">
             <param name="ios-package" value="CDVStatusBar" onload="true" />
         </feature>
