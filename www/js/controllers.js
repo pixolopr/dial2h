@@ -223,9 +223,9 @@ angular.module('starter.controllers', [])
 
         $scope.gPlace;
 
-        $ionicLoading.show({
+        /*$ionicLoading.show({
             template: 'Fetching Location...'
-        });
+        });*/
 
 
 
