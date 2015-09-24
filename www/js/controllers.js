@@ -131,7 +131,7 @@ angular.module('starter.controllers', [])
         var user = $.jStorage.get("user");
         $.jStorage.set("user", {});
 
-        var smssuccess = function () {
+        var smssuccess = function (data) {
 
             console.log(data);
         };
@@ -442,10 +442,10 @@ angular.module('starter.controllers', [])
 
         ////////FUNTION TO GET THE LIST OF VEHICLES/////
         var getvehiclesbytypesuccess = function (data, status) {
-            
-            
-            
-            
+
+
+
+
             //creating filter list
             for (var m = 0; m < data.length; m++) {
                 var make = data[m].vehiclemake;
@@ -454,19 +454,19 @@ angular.module('starter.controllers', [])
                 };
             };
             console.log($scope.filterlist);
-            
+
             //storing data in variables
             $scope.allvehicles = data;
             $scope.vehicledata = data;
-            
+
             for (var q = 0; q < $scope.vehicledata.length; q++) {
                 $scope.vehicledata[q].call = false;
                 $scope.vehicledata[q].icon = {
                     url: "img/" + type + "_icon.ico"
                 };
             };
-            
-            
+
+
             //adding call and icon
             for (var q = 0; q < $scope.vehicledata.length; q++) {
                 $scope.vehicledata[q].call = false;
@@ -474,7 +474,7 @@ angular.module('starter.controllers', [])
                     url: "img/" + type + "_icon.ico"
                 };
             };
-            
+
             $ionicLoading.hide();
             if (mapset == 0) {
                 setmap();
@@ -611,15 +611,20 @@ angular.module('starter.controllers', [])
         };
 
         var timerpopup = function () {
+            console.log("show popup");
             var tPopup = $ionicPopup.show({
                 templateUrl: 'templates/timer.html',
                 title: "Please wait for driver to  call...",
                 scope: $scope,
-                buttons: []
+                buttons: [{
+                    text: "cancel"
+                    }]
             });
+
             $interval(function () {
+                console.log("closing popup");
                 tPopup.close();
-            }, 3000);
+            }, 3000, 1);
         };
 
 
@@ -707,24 +712,36 @@ angular.module('starter.controllers', [])
                                             $ionicLoading.hide();
                                             timerpopup();
                                         };
+                                        var smserror = function (data, status) {
+                                            $ionicLoading.hide();
+                                            alert("There was some error connecting to the server");
+                                        };
 
                                         var inquirysuccess = function (data, status) {
                                             if (data == "true") {
-                                                MyServices.sendsms(drivernumber, message).success(smssuccess);
-                                                MyServices.sendsms(vendornumber, message).success(smssuccess);
+                                                MyServices.sendsms(drivernumber, message).success(smssuccess).error(smserror);
+                                                //MyServices.sendsms(vendornumber, message).success(smssuccess).error(smserror);
                                                 //smssuccess();
                                             } else {
                                                 $ionicLoading.hide();
-                                                alert("There is some error is the server")
+                                                alert("This vehicle is not available anymore");
                                             };
+                                        };
+                                        var inquiryerror = function (data, status) {
+                                            $ionicLoading.hide();
+                                            alert("There was some error connecting to the server");
                                         };
 
                                         var ipsuccess = function (data, status) {
                                             console.log(fromloc);
-                                            MyServices.sendinquiry(vehicle.vehicleid, data.ip, fromloc, toloc).success(inquirysuccess);
-                                            
+                                            MyServices.sendinquiry(vehicle.vehicleid, data.ip, fromloc, toloc).success(inquirysuccess).error(inquiryerror);
+
                                         };
-                                        MyServices.getip().success(ipsuccess);
+                                        var iperror = function (data, status) {
+                                            $ionicLoading.hide();
+                                            alert("There was some error connecting to the server");
+                                        };
+                                        MyServices.getip().success(ipsuccess).error(iperror);
 
 
                                         vehicle.call = true;
