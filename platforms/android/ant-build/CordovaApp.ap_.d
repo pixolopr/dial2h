@@ -63,8 +63,6 @@ C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\lib \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\plugins \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\templates \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\css\style.css \
-C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\auto_icon.ico \
-C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\auto_icon_call.ico \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\btnbg.png \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\car_display_pic.png \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\cc_slider.png \
@@ -72,11 +70,13 @@ C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\icon-auto.png \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\icon-car.png \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\icon-taxi.png \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\icon-truck.png \
+C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\local taxi_icon.ico \
+C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\local taxi_icon_call.ico \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\logo.png \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\rickshaw_display_pic.png \
+C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\rickshaw_icon.ico \
+C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\rickshaw_icon_call.ico \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\taxi_display_pic.png \
-C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\taxi_icon.ico \
-C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\taxi_icon_call.ico \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\tempo_icon.ico \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\tempo_icon_call.ico \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\img\tourist_icon.ico \
@@ -286,6 +286,7 @@ C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\plugins\cordova-plugin
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\plugins\org.apache.cordova.device\www \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\plugins\org.apache.cordova.device\www\device.js \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\templates\account.html \
+C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\templates\inquiry.html \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\templates\inquiryform.html \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\templates\login.html \
 C:\xampp\htdocs\dial2hireapp\platforms\android\assets\www\templates\menu.html \

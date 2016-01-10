@@ -95,12 +95,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'myservices', 'uiGmap
                         controller: 'vehiclelistCtrl'
                     }
                 }
+            })
+            .state('app.inquiries', {
+                url: '/inquiries',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/inquiry.html',
+                        controller: 'inquiriesCtrl'
+                    }
+                }
             });
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/search');
 
         $ionicConfigProvider.tabs.position('bottom');
         $ionicConfigProvider.navBar.alignTitle('center');
+        $ionicConfigProvider.views.maxCache(0);
     })
     /*.directive('googleplace', function () {
         return {
@@ -150,61 +160,114 @@ angular.module('starter', ['ionic', 'starter.controllers', 'myservices', 'uiGmap
 
 
 .directive('clickForOptions', ['$ionicGesture', function ($ionicGesture) {
-    return {
-        restrict: 'A',
+        return {
+            restrict: 'A',
 
 
 
-        link: function (scope, element, attrs) {
-            $ionicGesture.on('tap', function (e) {
+            link: function (scope, element, attrs) {
+                $ionicGesture.on('tap', function (e) {
 
-                /* Grab all list items -Content and Buttons */
-                var list = document.querySelector('.vlist');
-                var contentarray = list.querySelectorAll(".item-content");
-                var buttonsarray = list.querySelectorAll(".item-options");
+                    /* Grab all list items -Content and Buttons */
+                    var list = document.querySelector('.vlist');
+                    var contentarray = list.querySelectorAll(".item-content");
+                    var buttonsarray = list.querySelectorAll(".item-options");
 
-                // Grab the content
-                var content = element[0].querySelector('.item-content');
+                    // Grab the content
+                    var content = element[0].querySelector('.item-content');
 
-                // Grab the buttons and their width
-                var buttons = element[0].querySelector('.item-options');
+                    // Grab the buttons and their width
+                    var buttons = element[0].querySelector('.item-options');
 
-                if (!buttons) {
-                    console.log('There are no option buttons');
-                    return;
-                }
-                var buttonsWidth = buttons.offsetWidth;
+                    if (!buttons) {
+                        console.log('There are no option buttons');
+                        return;
+                    }
+                    var buttonsWidth = buttons.offsetWidth;
 
-                ionic.requestAnimationFrame(function () {
-                    content.style[ionic.CSS.TRANSITION] = 'all ease-out .25s';
+                    ionic.requestAnimationFrame(function () {
+                        content.style[ionic.CSS.TRANSITION] = 'all ease-out .25s';
 
-                    //Remove class after 250ms
-                    var removeclass = function (item) {
-                        setTimeout(function () {
-                            item.classList.add('invisible');
-                        }, 250);
-                    };
-
-                    //Iterate through all contents
-                    for (i = 0; i < contentarray.length; i++) {
-                        if (!buttonsarray[i].classList.contains('invisible')) {
-                            contentarray[i].style[ionic.CSS.TRANSFORM] = '';
-                            removeclass(buttonsarray[i]);
+                        //Remove class after 250ms
+                        var removeclass = function (item) {
+                            setTimeout(function () {
+                                item.classList.add('invisible');
+                            }, 250);
                         };
-                    };
 
-                    if (!buttons.classList.contains('invisible')) {
-                        content.style[ionic.CSS.TRANSFORM] = '';
-                        setTimeout(function () {
-                            buttons.classList.add('invisible');
-                        }, 250);
-                    } else {
-                        buttons.classList.remove('invisible');
-                        content.style[ionic.CSS.TRANSFORM] = 'translate3d(-' + buttonsWidth + 'px, 0, 0)';
+                        //Iterate through all contents
+                        for (i = 0; i < contentarray.length; i++) {
+                            if (!buttonsarray[i].classList.contains('invisible')) {
+                                contentarray[i].style[ionic.CSS.TRANSFORM] = '';
+                                removeclass(buttonsarray[i]);
+                            };
+                        };
+
+                        if (!buttons.classList.contains('invisible')) {
+                            content.style[ionic.CSS.TRANSFORM] = '';
+                            setTimeout(function () {
+                                buttons.classList.add('invisible');
+                            }, 250);
+                        } else {
+                            buttons.classList.remove('invisible');
+                            content.style[ionic.CSS.TRANSFORM] = 'translate3d(-' + buttonsWidth + 'px, 0, 0)';
+                        };
+                    });
+
+                }, element);
+            }
+        };
+           }])
+    .directive('map', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+
+                console.log(element[0]);
+
+                var myNode = element[0].children;
+                console.log(myNode);
+                if (myNode != null) {
+                    console.log(myNode);
+                    while (myNode.firstChild) {
+                        myNode.removeChild(myNode.firstChild);
                     };
+                };
+
+                var zValue = scope.$eval(attrs.zoom);
+                var lat = scope.$eval(attrs.latitude);
+                var lng = scope.$eval(attrs.longitude);
+
+                console.log(element[0]);
+                map = null;
+                var myLatlng = null;
+                console.log(map);
+
+                myLatlng = new google.maps.LatLng(lat, lng);
+
+                mapOptions = {
+                    zoom: zValue,
+                    center: myLatlng
+                };
+
+                map = new google.maps.Map(element[0], mapOptions);
+
+                console.log(map);
+
+                marker = new google.maps.Marker({
+                    position: myLatlng,
+                    map: map,
+                    draggable: true
                 });
 
-            }, element);
-        }
-    };
-           }]);
+
+
+                google.maps.event.addListener(marker, 'dragend', function (evt) {
+                    console.log('Current Latitude:', evt.latLng.lat(), 'Current Longitude:', evt.latLng.lng());
+                    scope.$parent.user.latitude = evt.latLng.lat();
+                    scope.$parent.user.longitude = evt.latLng.lng();
+                    scope.$apply();
+                });
+            }
+        };
+    });;

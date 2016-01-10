@@ -206,13 +206,24 @@ angular.module('starter.controllers', [])
             };
         };
     })
-    .controller('searchCtrl', function ($scope, $stateParams, $location, $http, $cordovaGeolocation, $ionicLoading) {
+    .controller('inquiriesCtrl', function ($scope, $location, MyServices) {
 
+        if ($.jStorage.get("user")) {
+            var user = $.jStorage.get("user");
+        };
 
+        var getuserinquiriessuccess = function (data, status) {
+            $scope.inquirylist = data;
+            console.log(data);
+        };
+        var getuserinquirieserror = function (data, status) {
 
+        };
+        MyServices.getuserinquiries(user.id).success(getuserinquiriessuccess).error(getuserinquirieserror);
 
-        // onError Callback receives a PositionError object
-        //
+    })
+
+.controller('searchCtrl', function ($scope, $stateParams, $location, $http, $cordovaGeolocation, $ionicLoading, $cordovaNetwork, $ionicPlatform) {
 
 
 
@@ -229,10 +240,13 @@ angular.module('starter.controllers', [])
 
 
 
+
+
         $scope.loca = {};
         $scope.currlocation = "Enter Your Location";
 
         var locsuccess = function (position) {
+            console.log("got location");
             var lat = position.coords.latitude;
             var long = position.coords.longitude;
 
@@ -258,28 +272,19 @@ angular.module('starter.controllers', [])
         };
 
         function onError(error) {
+            $ionicLoading.hide();
             alert('code: ' + error.code + '\n' +
                 'message: ' + error.message + '\n');
         };
 
-        navigator.geolocation.getCurrentPosition(locsuccess, onError);
+        //navigator.geolocation.getCurrentPosition(locsuccess, onError);
 
-        /* 
-        var posOptions = {
-             timeout: 10000,
-             enableHighAccuracy: true
-         };
-         $cordovaGeolocation
-             .getCurrentPosition(posOptions)
-             .then(function (position) {
+        $scope.$on('$ionicView.enter', function (e) {
 
-
-             }, function (err) {
-                 alert("Unable to get your location");
-                 $ionicLoading.hide();
-             });
-             */
-
+            $('#inp').val('');
+            navigator.geolocation.getCurrentPosition(locsuccess, onError);
+        });
+    
         $scope.vehicletypes = [{
                 id: 1,
                 selected: true,
@@ -306,7 +311,7 @@ angular.module('starter.controllers', [])
                 selected: false,
                 icon: "icon-taxi",
                 image: "img/taxi_display_pic.png",
-                value: "taxi"
+                value: "local taxi"
     }];
 
         $scope.showimage = $scope.vehicletypes[0].image;
@@ -336,7 +341,7 @@ angular.module('starter.controllers', [])
         };
 
     })
-    .controller('vehiclelistCtrl', function ($scope, $stateParams, $location, MyServices, $ionicLoading, $ionicSideMenuDelegate, $ionicPlatform, $cordovaDevice, $http, $cordovaGeolocation, $ionicPopup, $ionicListDelegate, $interval, $filter) {
+    .controller('vehiclelistCtrl', function ($scope, $stateParams, $location, MyServices, $ionicLoading, $ionicSideMenuDelegate, $ionicPlatform, $cordovaDevice, $http, $cordovaGeolocation, $ionicPopup, $ionicListDelegate, $interval, $filter, $cordovaNetwork, $ionicScrollDelegate) {
 
         //////PAGE SETUP///////
         //CAN DRAG CONTENT FOR MENU - TRUE
@@ -346,14 +351,32 @@ angular.module('starter.controllers', [])
         ///////////////////////
         $ionicListDelegate.canSwipeItems(false);
 
+        //CHECK INTERNET CONNECTION
+        var checkconnection = function () {
+            return $cordovaNetwork.isOffline();
+        };
 
         //CHANGE TAB
         $scope.changetab = function () {
+            $ionicScrollDelegate.scrollTop();
             $scope.tab = !$scope.tab;
+            if ($scope.tab == true) {
+                $(".scroll").css('height', '100vh')
+            } else {
+                $(".scroll").css('height', 'inherit')
+            };
+            console.log($scope.map);
+            //setmap();
         };
+
+
+        $scope.$on("$destroy", function () {
+            console.log("destroy");
+        });
 
         //FETCH TYPE OF CAR AND LOCATION DETAILS
         var type = $stateParams.type;
+        $scope.type = $stateParams.type;
         $scope.imagepath = "http://dial2hire.com/images/" + type + "_images/";
         var location = $stateParams.location;
         console.log(location);
@@ -406,29 +429,64 @@ angular.module('starter.controllers', [])
         $scope.icon = {
             url: "img/" + type + "_icon.ico"
         };
-        /////MARKERS///////////
-        /*var setmarkers = function () {
-            $scope.markers = [];
-            for (var q = 0; q < $scope.vehicledata.length; q++) {
-                $scope.markers.push({
-                    "id": $scope.vehicledata[q].vehicleid,
-                    "location": {
-                        "latitude": $scope.vehicledata[q].latitude,
-                        "longitude": $scope.vehicledata[q].longitude
-                    },
-                    "icon": {
-                        url: "img/" + type + "_icon.ico"
-                    }
 
-                });
-            };
-        };*/
+        //CALL CUSTOMER CARE
+        $scope.callcc = function () {
+            window.open('tel:88560 88560', '_system');
+        };
+
         /////FILTER////////
-        $scope.vehiclefilter = "all";
+        $scope.vehiclefilter = "";
+        $scope.vehicletrollyfilter = "";
+        $scope.filter = {};
+        $scope.filter.vehicle = "all";
+        $scope.filter.trolly = "all";
         $scope.filterlist = [];
+        $scope.trollyfilterlist = [];
 
-        $scope.filtercars = function (make) {
+        $scope.filtercars = function () {
+            console.log($scope.filter.trolly);
+            console.log($scope.filter.vehicle);
             $scope.vehicledata = [];
+
+            if ($scope.filter.vehicle == "all") {
+                if ($scope.type == 'tempo') {
+                    if ($scope.filter.trolly == "all") {
+                        $scope.vehicledata = $scope.allvehicles;
+                    } else {
+                        for (var ft = 0; ft < $scope.allvehicles.length; ft++) {
+                            if ($scope.allvehicles[ft].trollylength == $scope.filter.trolly) {
+                                $scope.vehicledata.push($scope.allvehicles[ft]);
+                            };
+                        };
+                    };
+                } else {
+                    $scope.vehicledata = $scope.allvehicles;
+                };
+            } else {
+                for (var f = 0; f < $scope.allvehicles.length; f++) {
+                    if ($scope.allvehicles[f].vehiclemake == $scope.filter.vehicle) {
+                        if ($scope.type == 'tempo') {
+                            if ($scope.filter.trolly == "all") {
+                                $scope.vehicledata.push($scope.allvehicles[f]);
+                            } else {
+                                if ($scope.allvehicles[f].trollylength == $scope.filter.trolly) {
+                                    $scope.vehicledata.push($scope.allvehicles[f]);
+                                };
+                            };
+                        } else {
+                            $scope.vehicledata.push($scope.allvehicles[f]);
+                        };
+
+                    };
+                };
+            };
+        };
+
+        $scope.filtertrollylength = function (length) {
+            console.log(length);
+            console.log($scope.vehicletrollyfilter);
+            /*$scope.vehicledata = [];
             if (make == "all") {
                 $scope.vehicledata = $scope.allvehicles;
             } else {
@@ -437,7 +495,7 @@ angular.module('starter.controllers', [])
                         $scope.vehicledata.push($scope.allvehicles[f]);
                     };
                 };
-            };
+            };*/
         };
 
         ////////FUNTION TO GET THE LIST OF VEHICLES/////
@@ -445,12 +503,18 @@ angular.module('starter.controllers', [])
 
 
 
-
+            console.log(data);
             //creating filter list
             for (var m = 0; m < data.length; m++) {
                 var make = data[m].vehiclemake;
                 if ($scope.filterlist.indexOf(make) == -1) {
                     $scope.filterlist.push(make);
+                };
+                if ($scope.type == 'tempo') {
+                    var trollylength = data[m].trollylength;
+                    if ($scope.trollyfilterlist.indexOf(trollylength) == -1) {
+                        $scope.trollyfilterlist.push(trollylength);
+                    };
                 };
             };
             console.log($scope.filterlist);
@@ -492,6 +556,7 @@ angular.module('starter.controllers', [])
 
         var getlist = function () {
             console.log($scope.location1, $scope.location2);
+
             MyServices.getvehiclesbytype(type, $scope.location1, $scope.location2).success(getvehiclesbytypesuccess).error(getvehiclesbytypeerror);
         };
         ///////////////////////////
@@ -501,27 +566,26 @@ angular.module('starter.controllers', [])
         $scope.location2 = {};
 
         if (location == "") {
-            var posOptions = {
-                timeout: 10000,
-                enableHighAccuracy: true
+
+            var locsuccess = function (position) {
+                var lat = position.coords.latitude;
+                var long = position.coords.longitude;
+                console.log(lat);
+                $scope.location1.latitude = lat + 0.0300;
+                $scope.location1.longitude = long + 0.0300;
+                $scope.location2.latitude = lat - 0.0300;
+                $scope.location2.longitude = long - 0.0300;
+                getlist();
             };
-            $cordovaGeolocation
-                .getCurrentPosition(posOptions)
-                .then(function (position) {
-                    var lat = position.coords.latitude;
-                    var long = position.coords.longitude;
-                    console.log(lat);
-                    $scope.location1.latitude = lat + 0.0300;
-                    $scope.location1.longitude = long + 0.0300;
-                    $scope.location2.latitude = lat - 0.0300;
-                    $scope.location2.longitude = long - 0.0300;
 
-                    getlist();
+            function onError(error) {
+                $ionicLoading.hide();
+                alert('code: ' + error.code + '\n' +
+                    'message: ' + error.message + '\n');
+            };
 
-                }, function (err) {
-                    alert("Unable to get your location");
-                    $ionicLoading.hide();
-                });
+            navigator.geolocation.getCurrentPosition(locsuccess, onError);
+
         } else {
             $http.get("http://maps.google.com/maps/api/geocode/json", {
                 params: {
@@ -606,15 +670,20 @@ angular.module('starter.controllers', [])
         /*INQUIRY*/
 
         //SEND SMS
-        var smssuccess = function (data, status) {
+        var smssuccess1 = function (data, status) {
             console.log(data);
+        };
+
+        $scope.gettime = function () {
+            return $scope.timetocall;
         };
 
         var timerpopup = function () {
             console.log("show popup");
+            $scope.timetocall = 60;
             var tPopup = $ionicPopup.show({
                 templateUrl: 'templates/timer.html',
-                title: "Please wait for driver to  call...",
+                title: "Please wait 60 secs for driver to  call...",
                 scope: $scope,
                 buttons: [{
                     text: "cancel"
@@ -622,9 +691,14 @@ angular.module('starter.controllers', [])
             });
 
             $interval(function () {
+                $scope.timetocall--;
+                console.log($scope.timetocall);
+            }, 1000, 60);
+
+            $interval(function () {
                 console.log("closing popup");
                 tPopup.close();
-            }, 3000, 1);
+            }, 60000, 1);
         };
 
 
@@ -705,16 +779,26 @@ angular.module('starter.controllers', [])
 
                                         var message = "You have recived an inquiry from: " + user.name + " Phone:- " + user.contact + ". From:" + $scope.inquirydata.from + " To: " + $scope.inquirydata.to + " on: " + $scope.inquirydata.date;
 
+
                                         var fromloc = $scope.inquirydata.from;
                                         var toloc = $scope.inquirydata.to;
 
                                         var smssuccess = function (data, status) {
+                                            alert('sending thank you message');
+                                            MyServices.sendsms(user.contact, "We have recieved your inruiry. Thank You for using Dial2Hire").success(smssuccess1).error(smserror);
                                             $ionicLoading.hide();
                                             timerpopup();
                                         };
                                         var smserror = function (data, status) {
                                             $ionicLoading.hide();
-                                            alert("There was some error connecting to the server");
+                                            //timerpopup();
+                                            $ionicPopup.show({
+                                                title: "Message not sent, please call the vendor",
+                                                scope: $scope,
+                                                buttons: [{
+                                                    text: "OK"
+                    }]
+                                            });
                                         };
 
                                         var inquirysuccess = function (data, status) {
@@ -724,12 +808,24 @@ angular.module('starter.controllers', [])
                                                 //smssuccess();
                                             } else {
                                                 $ionicLoading.hide();
-                                                alert("There was some error connecting to the server");
+                                                $ionicPopup.show({
+                                                    title: "The vehicle is no longer available",
+                                                    scope: $scope,
+                                                    buttons: [{
+                                                        text: "OK"
+                    }]
+                                                });
                                             };
                                         };
                                         var inquiryerror = function (data, status) {
                                             $ionicLoading.hide();
-                                            alert("There was some error connecting to the server");
+                                            $ionicPopup.show({
+                                                title: "There was some error connecting to the server",
+                                                scope: $scope,
+                                                buttons: [{
+                                                    text: "OK"
+                    }]
+                                            });
                                         };
 
                                         var ipsuccess = function (data, status) {
@@ -739,7 +835,13 @@ angular.module('starter.controllers', [])
                                         };
                                         var iperror = function (data, status) {
                                             $ionicLoading.hide();
-                                            alert("There was some error connecting to the server");
+                                            $ionicPopup.show({
+                                                title: "There was some error connecting to the server",
+                                                scope: $scope,
+                                                buttons: [{
+                                                    text: "OK"
+                    }]
+                                            });
                                         };
                                         MyServices.getip().success(ipsuccess).error(iperror);
 

@@ -31,6 +31,8 @@
         </author>
     <content src="index.html" />
     <access origin="*" />
+    <allow-navigation href="*" />
+    <allow-intent href="*" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
@@ -39,8 +41,5 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="Orientation" value="portrait" />
-    <uses-permission name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <icon density="xhdpi" src="resources\android\icon\drawable-xhdpi-icon.png" />
 </widget>

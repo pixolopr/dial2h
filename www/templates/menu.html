@@ -16,7 +16,7 @@
         <ion-header-bar class="bluebg">
             <h1 class="title bluebg">Menu</h1>
         </ion-header-bar>
-        <ion-content class="bluebg">
+        <ion-content class="bluebg" style="height: 100%;">
             <ion-list class="menu bluebg">
                <ion-item menu-close href="#/app/signup" ng-if="!userexist">
                 <div class="row"  class="bluebg" >
@@ -27,7 +27,7 @@
                     </div>
 
                 </ion-item>
-                <ion-item menu-close  ng-if="userexist" ng-click="logout()">
+                <ion-item menu-close  ng-if="userexist" ng-click="logout()" href="">
                 <div class="row"  class="bluebg" >
                         <div class="col col-25"><i class="icon ion-log-in"></i>
                         </div>
@@ -41,6 +41,14 @@
                         <div class="col col-25"><i class="icon ion-search"></i>
                         </div>
                         <div class="col col-75">Search</div>
+                    </div>
+
+                </ion-item>
+                   <ion-item menu-close href="#/app/inquiries">
+                    <div class="row">
+                        <div class="col col-25"><i class="icon ion-help-circled"></i>
+                        </div>
+                        <div class="col col-75">Inquiries</div>
                     </div>
 
                 </ion-item>

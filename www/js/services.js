@@ -1,5 +1,5 @@
 //var adminurl = "http://localhost/d2hBackend/index.php/";
-var adminurl = "http://pixolo.co.in/d2hBackend/index.php/";
+var adminurl = "http://dial2hire.com/d2hBackend/index.php/";
 var myservices = angular.module('myservices', [])
 
 .factory('MyServices', function ($http, $location) {
@@ -29,6 +29,14 @@ var myservices = angular.module('myservices', [])
         getip: function () {
             return $http.get("http://ipv4.myexternalip.com/json", {
                 params: {}
+            });
+
+        },
+        getuserinquiries: function (id) {
+            return $http.get(adminurl + "inquiry/getuserinquiry", {
+                params: {
+                    id: id
+                }
             });
 
         },

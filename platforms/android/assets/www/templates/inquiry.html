@@ -1,0 +1,24 @@
+<ion-view view-title="INQUIRIES">
+    <ion-content class="noscroll">
+        <ion-list class="vlist">
+
+            <ion-item class="padbox" ng-repeat="inquiry in inquirylist">
+                <div class="row">
+                    <div class="col col-10 inqindex">
+                        {{$index+1 }}
+                    </div>
+                    <div class="col col-90">
+                        <div style="font-size: 30px;">{{inquiry.type}}</div>
+                        <div style="margin-top: 5%;">
+                            <p>From : {{inquiry.fromloc}}</p>
+                            <p> To : {{inquiry.toloc}}</p>
+                            <p class="orangecolor">Vehicle Code : A{{user.pid}}</p>
+                            <span class="item-note margin-7"><i class="ion-ios-clock-outline"></i> {{inquiry.date}}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>

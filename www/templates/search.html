@@ -17,7 +17,9 @@
                     <div class="taxi" ng-class="{selected:vehicle.selected, deselected:!vehicle.selected}" ng-click="selectvehicle(vehicle.id)">
                         <img src="img/{{vehicle.icon}}.png" class="selecticon">
                     </div>
+                    {{vehicle.value}}
                 </div>
+                
             </div>
         </div>
 
@@ -33,7 +35,7 @@
         <div style="padding-left: 43%;">
 
             <button ng-click="getvehicles()" class="button gobutton gobutton3">
-                Go
+                Search
             </button>
         </div>
     </ion-content>
